@@ -1,0 +1,237 @@
+.about {
+    position: relative;
+    width: 100%; /* Asegura que el contenedor abarque el 100% del ancho */
+    overflow: hidden; /* Evita que el contenido se desborde */
+}
+
+.about__background-container {
+    position: relative;
+    width: 100%;
+    height: 40rem; /* Fija la altura del contenedor */
+    overflow: hidden; /* Oculta el contenido que exceda la altura del contenedor */
+    margin-bottom: 40px;
+}
+
+.about__background {
+    width: 100%; /* Asegura que la imagen abarque el 100% del ancho */
+    height: 100%; /* Asegura que la imagen abarque el 100% de la altura del contenedor */
+    object-fit: cover; /* Cubre el área del contenedor y recorta cualquier contenido adicional */
+    display: block; /* Asegura que la imagen se comporte como un bloque y tome todo el ancho disponible */
+}
+
+.about__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white; /* Asegúrate de que el texto sea visible sobre la imagen */
+    background: rgba(0, 0, 0, 0.7); /* Fondo semitransparente para mejor legibilidad */
+    display: flex;
+    flex-direction: column;
+}
+
+.about__text-container {
+    width: 80%; /* Ajusta el ancho del contenedor de texto */
+    max-width: 900px; /* Ajusta el valor según el ancho deseado */
+    text-align: justify; /* Justifica el texto del párrafo */
+}
+.about__text-containers {
+    width: 80%; /* Ajusta el ancho del contenedor de texto */
+    max-width: 900px; /* Ajusta el valor según el ancho deseado */
+    display: flex;
+    justify-content: space-between;  
+    margin-top: 100px;  
+}
+
+.about__text-containers h1, .about__text-containers p{
+    text-align: center;    
+}
+
+
+.about__text-container h1 {
+    font-size: 3.8em; /* Aumenta el tamaño de la fuente */
+    font-weight: 400;
+    margin-bottom: 10px;
+    display: inline-block; /* Asegura que el encabezado tome el ancho del contenedor */
+    width: 100%;
+    text-align: center;
+}
+
+.about__text-container p {
+    font-size: 1.2em;
+    margin: 0;
+    word-wrap: break-word; /* Permite que el texto se ajuste si es necesario */
+    display: inline-block; /* Asegura que el párrafo se distribuya correctamente */
+    width: 100%; /* Asegura que el párrafo tome el mismo ancho que el encabezado */
+}
+
+.about__works-container h1 {
+    font-size: 3.39em; /* Aumenta el tamaño de la fuente */
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: inline-block; /* Asegura que el encabezado tome el ancho del contenedor */
+    width: 100%;
+    text-align: center;
+}
+
+.about__works {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas si es necesario */
+    gap: 5px;
+}
+
+.about__work {
+    position: relative; /* Añade posición relativa para contener elementos absolutamente posicionados */
+    display: flex; /* Habilita Flexbox */
+    flex-direction: column; /* Hace que los hijos se alineen verticalmente */
+    justify-content: space-between; /* Distribuye el espacio disponible entre los hijos */
+    text-align: center;
+    background-size: cover; /* Cubre todo el contenedor */
+    background-position: center; /* Centra la imagen */
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+    border-radius: 30px;
+    flex: 0 0 250px; /* Asegura que el ancho sea fijo en un contenedor flex */
+    padding-top: 2.5rem;
+    padding-bottom: 1rem;
+    background-color: #E6E6E6;
+    overflow: hidden; /* Asegura que el pseudo-elemento no se desborde */
+    z-index: 1; /* Asegura que el contenedor esté por encima del pseudo-elemento */
+}
+
+.about__work::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../assets/Landing/Registro.JPG'); /* Imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    z-index: 0; /* Asegura que el pseudo-elemento esté detrás del contenido */
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.about__work:hover::before {
+    opacity: 1;
+    filter: sepia(1) saturate(5) hue-rotate(-50deg) brightness(0.4) contrast(1.5); /* Ajustes para intensificar el tono rojo */
+}
+
+
+.about__work-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejor legibilidad */
+    color: white; /* Asegúrate de que el texto sea visible sobre la imagen */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 30px;
+    z-index: 1; /* Asegura que el overlay esté encima del pseudo-elemento */
+}
+
+.about__work-img {
+    margin-bottom: 20px;
+    height: 60px;
+    z-index: 2; /* Asegura que las imágenes estén encima del pseudo-elemento */
+}
+
+.about__work h2 {
+    z-index: 2; /* Asegura que los encabezados estén encima del pseudo-elemento */
+}
+
+.about__work p {
+    text-align: justify;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    z-index: 2; /* Asegura que los párrafos estén encima del pseudo-elemento */
+}
+
+.about__view-more {
+    margin-top: auto; /* Empuja el "VER MÁS" hacia la parte inferior del contenedor */
+    text-align: end;
+    z-index: 2; /* Asegura que el texto "VER MÁS" esté encima del pseudo-elemento */
+}
+
+.about__client-h1 {
+    
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px; /* Espacio entre el texto y la línea */
+    text-align: justify; /* Centra el texto */
+    border-bottom: 2px solid #AA2B27; /* Línea roja debajo del texto */
+}
+
+.about__client-container{    
+    position: relative;
+    width: 100%;
+    height: 5rem; /* Fija la altura del contenedor */
+    margin-bottom: 40px;
+}
+
+.about__text-client {
+    width: auto; /* Ajusta el ancho del contenedor de texto */
+    text-align: justify; /* Justifica el texto del párrafo */
+    font-size: 1.1em;
+}
+.about__client-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+    color: black; /* Asegúrate de que el texto sea visible sobre la imagen */    
+    background-color: #E6E6E6;
+}
+
+.about__triangle-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.about__triangle {
+    text-align: center;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+}
+
+.about__triangle h2 {
+    color: #AA2B27;
+}
+
+@media screen and (min-width: 1600px) {
+    .about__work {
+        flex: 0 0 300px;
+    }
+}
+
+@media screen and (max-width:1300px) {
+    .about__client-container{
+        height: 9rem;
+    }
+    .about__text-client h1{
+        font-size: 50px;
+    }
+}
+
+.about__work:hover {
+    color: white;
+}
