@@ -1,26 +1,88 @@
-.about {
-    position: relative;
-    width: 100%; /* Asegura que el contenedor abarque el 100% del ancho */
-    overflow: hidden; /* Evita que el contenido se desborde */
+.specialty__tables {
+    display: block;
+    width: 80%;
+    align-items: center;
 }
 
-.about__background-container {
+.specialty__tables h1{
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.specialty__table-title{
+    display: flex;
+    background-color: #E6E6E6;
+    gap: 5px;
+    margin-bottom: 10px;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.specialty {
     position: relative;
     width: 100%;
-    min-height: 40rem;
-    height: 100vh; /* Fija la altura del contenedor */
-    overflow: hidden; /* Oculta el contenido que exceda la altura del contenedor */
-    margin-bottom: 40px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.specialty__icon {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.table-container {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
 }
 
-.about__background {
-    width: 100%; /* Asegura que la imagen abarque el 100% del ancho */
-    height: 100%; /* Asegura que la imagen abarque el 100% de la altura del contenedor */
-    object-fit: cover; /* Cubre el área del contenedor y recorta cualquier contenido adicional */
-    display: block; /* Asegura que la imagen se comporte como un bloque y tome todo el ancho disponible */
+.specialty__table {
+    width: 95%;
+    border-collapse: collapse; /* Remove extra space between table cells */
 }
 
-.about__overlay {
+.specialty__table th, .specialty__table td {
+    padding: 5px; /* Reduce the padding to make rows smaller */
+    border: none; /* Remove all borders */
+}
+
+.specialty__table th {
+    background-color: #f4f4f4; /* Header background color */
+}
+
+.specialty__table td {
+    border-right: 1px solid #ccc; /* Add border between columns */
+}
+
+.specialty__table td:last-child {
+    border-right: none; /* Remove right border for the last column */
+}
+
+.odd-row {    
+    background-color: #E6E6E6;
+}
+
+.even-row {    
+    background-color: white;
+}
+
+.specialty__background-container {
+    position: relative;
+    width: 100%;
+    min-height: 5rem;
+    height: 10rem;
+    overflow: hidden;
+}
+
+.specialty__background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.specialty__overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -30,167 +92,57 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: white; /* Asegúrate de que el texto sea visible sobre la imagen */
-    background: rgba(0, 0, 0, 0.7); /* Fondo semitransparente para mejor legibilidad */
-    display: flex;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
     flex-direction: column;
 }
 
-.about__text-container {
-    width: 80%; /* Ajusta el ancho del contenedor de texto */
-    max-width: 900px; /* Ajusta el valor según el ancho deseado */
-    text-align: justify; /* Justifica el texto del párrafo */
-}
-.about__text-containers {
-    width: 80%; /* Ajusta el ancho del contenedor de texto */
-    max-width: 900px; /* Ajusta el valor según el ancho deseado */
-    display: flex;
-    justify-content: space-between;  
-    margin-top: 100px;
-    margin-bottom: 50px;  
+.specialty__text-container {
+    width: 80%;
+    max-width: 900px;
+    text-align: justify;
 }
 
-.about__text-containers h1, .about__text-containers p{
-    text-align: center;    
-}
-
-
-.about__text-container h1 {
-    font-size: 3.8em; /* Aumenta el tamaño de la fuente */
+.specialty__text-container h1 {
+    font-size: 3.8em;
     font-weight: 400;
-    margin-bottom: 10px;
-    display: inline-block; /* Asegura que el encabezado tome el ancho del contenedor */
+    display: inline-block;
     width: 100%;
     text-align: center;
 }
 
-.about__text-container p {
+.specialty__text-container p {
     font-size: 1.2em;
     margin: 0;
-    word-wrap: break-word; /* Permite que el texto se ajuste si es necesario */
-    display: inline-block; /* Asegura que el párrafo se distribuya correctamente */
-    width: 100%; /* Asegura que el párrafo tome el mismo ancho que el encabezado */
-}
-
-.about__works-container h1 {
-    font-size: 3.39em; /* Aumenta el tamaño de la fuente */
-    font-weight: 500;
-    margin-bottom: 10px;
-    display: inline-block; /* Asegura que el encabezado tome el ancho del contenedor */
+    word-wrap: break-word;
+    display: inline-block;
     width: 100%;
-    text-align: center;
 }
 
-.about__works {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas si es necesario */
-    gap: 5px;
-}
-
-.about__work {
-    position: relative; /* Añade posición relativa para contener elementos absolutamente posicionados */
-    display: flex; /* Habilita Flexbox */
-    flex-direction: column; /* Hace que los hijos se alineen verticalmente */
-    justify-content: space-between; /* Distribuye el espacio disponible entre los hijos */
-    text-align: center;
-    background-size: cover; /* Cubre todo el contenedor */
-    background-position: center; /* Centra la imagen */
-    padding: 1.5rem;
-    margin-bottom: 3rem;
-    margin-top: 2rem;
-    border-radius: 30px;
-    flex: 0 0 250px; /* Asegura que el ancho sea fijo en un contenedor flex */
-    padding-top: 2.5rem;
-    padding-bottom: 1rem;
-    background-color: #E6E6E6;
-    overflow: hidden; /* Asegura que el pseudo-elemento no se desborde */
-    z-index: 1; /* Asegura que el contenedor esté por encima del pseudo-elemento */
-}
-
-.about__work::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../../assets/Landing/Registro.JPG'); /* Imagen de fondo */
-    background-size: cover;
-    background-position: center;
-    z-index: 0; /* Asegura que el pseudo-elemento esté detrás del contenido */
-    opacity: 0;
-    transition: opacity 0.6s ease-in-out;
-}
-
-.about__work:hover::before {
-    opacity: 1;
-    filter: sepia(1) saturate(5) hue-rotate(-50deg) brightness(0.4) contrast(1.5); /* Ajustes para intensificar el tono rojo */
-}
-
-
-.about__work-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejor legibilidad */
-    color: white; /* Asegúrate de que el texto sea visible sobre la imagen */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-radius: 30px;
-    z-index: 1; /* Asegura que el overlay esté encima del pseudo-elemento */
-}
-
-.about__work-img {
-    margin-bottom: 20px;
-    height: 60px;
-    z-index: 2; /* Asegura que las imágenes estén encima del pseudo-elemento */
-}
-
-.about__work h2 {
-    z-index: 2; /* Asegura que los encabezados estén encima del pseudo-elemento */
-}
-
-.about__work p {
-    text-align: justify;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    z-index: 2; /* Asegura que los párrafos estén encima del pseudo-elemento */
-}
-
-.about__view-more {
-    margin-top: auto; /* Empuja el "VER MÁS" hacia la parte inferior del contenedor */
-    text-align: end;
-    z-index: 2; /* Asegura que el texto "VER MÁS" esté encima del pseudo-elemento */
-}
-
-.about__client-h1 {
-    
+.specialty__client-h1 {
     position: relative;
     display: inline-block;
-    margin-bottom: 15px; /* Espacio entre el texto y la línea */
-    text-align: justify; /* Centra el texto */
-    border-bottom: 2px solid #AA2B27; /* Línea roja debajo del texto */
+    text-align: justify;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
 }
 
-.about__client-container{    
+.specialty__client-container {
     position: relative;
     width: 100%;
-    height: 5rem; /* Fija la altura del contenedor */
-    margin-bottom: 40px;
+    height: 5rem;
+    margin: 10px;
+    margin-bottom: 20px;
 }
 
-.about__text-client {
-    width: auto; /* Ajusta el ancho del contenedor de texto */
-    text-align: justify; /* Justifica el texto del párrafo */
+.specialty__text-client {
+    width: auto;
+    text-align: justify;
     font-size: 1.1em;
 }
-.about__client-overlay {
+
+.specialty__client-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -200,86 +152,15 @@
     justify-content: center;
     align-items: center;
     text-align: justify;
-    color: black; /* Asegúrate de que el texto sea visible sobre la imagen */    
-    background-color: #E6E6E6;
+    color: black;
 }
 
-.about__triangle-container {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.about__triangle {
-    text-align: center;
-    margin-bottom: 3rem;
-    margin-top: 2rem;
-}
-
-.about__triangle h2 {
-    color: #AA2B27;
-}
-
-@media screen and (min-width: 1600px) {
-    .about__work {
-        flex: 0 0 300px;
-    }
-}
-
-@media screen and (max-width:1300px) {
-    .about__client-container{
+@media screen and (max-width: 1300px) {
+    .specialty__client-container {
         height: 9rem;
     }
-    .about__text-client h1{
-        font-size: 50px;
+
+    .specialty__text-client h1 {
+        font-size: 15px;
     }
 }
-
-.about__work:hover {
-    color: white;
-}
-
-#ninth>button{
-    transition:all .5s ease-in-out; 
-    font-size: 25px;
-    border-radius: 10px;
-  }
-  
-  #ninth:hover button{
-    background:white;
-    color:#ff9292;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-  
-  .contentBox{
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-  
-  .buttonBox{
-    margin: 0 20px 40px;
-    position:relative;
-    max-width: 250px;
-    min-width: 150px;
-    flex: 20%;
-  }
-  
-  button{
-    width:100%;
-    height:100px;
-    position:relative;
-    background:rgba(255, 255, 255, .27);
-    text-transform:uppercase;
-    color:white;
-    font-weight:700;
-    letter-spacing:1px;
-    border:none;
-    font-size:15px;
-    outline:none;
-    cursor: pointer;
-  }
-  
