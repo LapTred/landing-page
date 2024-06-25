@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import background from "../../assets/Landing/Imagen-de-fondo.jpg";
-import "./About.css";
+import "./specialty.css";
 import Asset1 from "../../assets/Landing/Asset1.png";
 import Asset3 from "../../assets/Landing/Asset3.png";
 import Asset4 from "../../assets/Landing/Asset4.png";
@@ -15,7 +15,7 @@ import Asset12 from "../../assets/Landing/Asset12.png";
 import Asset13 from "../../assets/Landing/Asset13.png";
 import Asset14 from "../../assets/Landing/Asset14.png";
 
-const About = () => {
+const Specialty = () => {
     const [hovered, setHovered] = useState(null);
 
     const handleMouseEnter = (id) => {
@@ -27,33 +27,14 @@ const About = () => {
     };
 
     return (
-        <div className="about">
+        <div className="specialty">
             <div className="about__background-container">
                 <img src={background} alt="Background" className="about__background"/>     
                 <div className="about__overlay">
                     <div className="about__text-container">
                         <h1>SÉ NUESTRO ALIADO COMERCIAL</h1>
                         <p className="text-center">EN ATISA BUSCAMOS SUPERAR NUESTRA META DE 1,000,000 DE PIES CUADRADOS CONSTRUIDOS Y ESTAMOS SEGUROS QUE SIENDO NUESTRO ALIADO PODREMOS LOGRARLO.</p>
-                    </div>
-                    <div className="about__text-containers">
-                        <div className="about__text-container">
-                            <h1>+1,000,000</h1>
-                            <p>SQ FT CONSTRUIDOS</p>                    
-                        </div>
-                        <div className="about__text-container">
-                            <h1>+50</h1>
-                            <p>AÑOS DE EXPERIENCIA</p>                   
-                        </div>
-                        <div className="about__text-container">
-                            <h1>+100</h1>
-                            <p>PROYECTOS</p>                   
-                        </div>
-                    </div>
-                    <div class="contentBox">
-                        <div id="ninth" class="buttonBox">
-                            <button>UNIRSE</button>
-                        </div>                      
-                    </div>
+                    </div>                    
                 </div>
             </div>
             <div className="about__works-container">
@@ -152,4 +133,4 @@ const About = () => {
     );
 };
 
-export default About;
+export default Specialty;
