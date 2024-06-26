@@ -7,18 +7,43 @@ import Logo from "../../assets/Landing/AtisaGroup-bco.svg";
 const Navbar = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null); // Estado para controlar el dropdown activo
+  const [showSubmenu, setShowSubmenu] = useState(false); // Estado para controlar el submenu principal
 
+  // Función para manejar la navegación y cerrar los menús desplegables
   const handleNavigation = (path) => {
     navigate(path);
-    setDropdownOpen(false); // Close dropdown on navigation
+    setDropdownOpen(false); // Cerrar dropdown principal en la navegación
+    setShowSubmenu(false); // Cerrar submenu principal en la navegación
+    setActiveDropdown(null); // Limpiar el dropdown activo en la navegación
   };
 
+  // Manejar entrada y salida del dropdown principal
   const handleMouseEnter = () => {
     setDropdownOpen(true);
   };
 
   const handleMouseLeave = () => {
     setDropdownOpen(false);
+    setActiveDropdown(null); // Limpiar el dropdown activo al salir
+  };
+
+  // Mostrar y ocultar el submenu principal
+  const handleSubmenuEnter = () => {
+    setShowSubmenu(true);
+  };
+
+  const handleSubmenuLeave = () => {
+    setShowSubmenu(false);
+  };
+
+  // Manejar entrada y salida de cada dropdown individualmente
+  const handleDropdownEnter = (dropdownName) => {
+    setActiveDropdown(dropdownName);
+  };
+
+  const handleDropdownLeave = () => {
+    setActiveDropdown(null);
   };
 
   return (
@@ -38,25 +63,91 @@ const Navbar = () => {
             <li className="nav__item" onClick={() => handleNavigation("/especialidades")}>
               <span className="nav__link">ESPECIALIDADES</span>
             </li>
-            <li 
-              className="nav__item" 
-              onMouseEnter={handleMouseEnter} 
+            <li
+              className="nav__item"
+              onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
+              onMouseOver={() => handleSubmenuEnter()}
+              onMouseOut={() => handleSubmenuLeave()}
             >
               <span className="nav__link">PROVEEDORES</span>
               {isDropdownOpen && (
-                <ul className="dropdown">
-                  <li className="dropdown__item" onClick={() => handleNavigation("/construccion")} style={{ backgroundColor: "#AA2B27" }}>
+                <ul className="dropdown" onMouseEnter={() => handleDropdownEnter("proveedores")}>
+                  <li
+                    className="dropdown__item"
+                    onClick={() => handleNavigation("/construccion")}
+                    style={{ backgroundColor: "#AA2B27" }}
+                    onMouseOver={() => handleSubmenuEnter()}
+                    onMouseOut={() => handleSubmenuLeave()}
+                  >
                     CONSTRUCCIÓN
+                    {activeDropdown === "proveedores" && showSubmenu && (
+                      <ul className="submenu" style={{ top: "0", left: "100%" }}>
+                        <li className="submenu__item" onClick={() => handleNavigation("/construccion/registro")}>
+                          Registro
+                        </li>
+                        <li className="submenu__item" onClick={() => handleNavigation("/construccion/reverse-auction")}>
+                          Reverse auction
+                        </li>
+                      </ul>
+                    )}
                   </li>
-                  <li className="dropdown__item" onClick={() => handleNavigation("/materiales-construccion")} style={{ backgroundColor: "#881F1A" }}>
+                  <li
+                    className="dropdown__item"
+                    onClick={() => handleNavigation("/materiales-construccion")}
+                    style={{ backgroundColor: "#881F1A" }}
+                    onMouseOver={() => handleSubmenuEnter()}
+                    onMouseOut={() => handleSubmenuLeave()}
+                  >
                     MATERIALES P/CONSTRUCCIÓN
+                    {activeDropdown === "proveedores" && showSubmenu && (
+                      <ul className="submenu" style={{ top: "0", left: "100%" }}>
+                        <li className="submenu__item" onClick={() => handleNavigation("/materiales-construccion/registro")}>
+                          Registro
+                        </li>
+                        <li className="submenu__item" onClick={() => handleNavigation("/materiales-construccion/reverse-auction")}>
+                          Reverse auction
+                        </li>
+                      </ul>
+                    )}
                   </li>
-                  <li className="dropdown__item" onClick={() => handleNavigation("/refacciones-maquinaria")} style={{ backgroundColor: "#680F06" }}>
+                  <li
+                    className="dropdown__item"
+                    onClick={() => handleNavigation("/refacciones-maquinaria")}
+                    style={{ backgroundColor: "#680F06" }}
+                    onMouseOver={() => handleSubmenuEnter()}
+                    onMouseOut={() => handleSubmenuLeave()}
+                  >
                     REFACCIONES MAQ. PESADA
+                    {activeDropdown === "proveedores" && showSubmenu && (
+                      <ul className="submenu" style={{ top: "0", left: "100%" }}>
+                        <li className="submenu__item" onClick={() => handleNavigation("/refacciones-maquinaria/registro")}>
+                          Registro
+                        </li>
+                        <li className="submenu__item" onClick={() => handleNavigation("/refacciones-maquinaria/reverse-auction")}>
+                          Reverse auction
+                        </li>
+                      </ul>
+                    )}
                   </li>
-                  <li className="dropdown__item" onClick={() => handleNavigation("/insumos-oficina")} style={{ backgroundColor: "#470000" }}>
+                  <li
+                    className="dropdown__item"
+                    onClick={() => handleNavigation("/insumos-oficina")}
+                    style={{ backgroundColor: "#470000" }}
+                    onMouseOver={() => handleSubmenuEnter()}
+                    onMouseOut={() => handleSubmenuLeave()}
+                  >
                     INSUMOS P/OFICINA
+                    {activeDropdown === "proveedores" && showSubmenu && (
+                      <ul className="submenu" style={{ top: "0", left: "100%" }}>
+                        <li className="submenu__item" onClick={() => handleNavigation("/insumos-oficina/registro")}>
+                          Registro
+                        </li>
+                        <li className="submenu__item" onClick={() => handleNavigation("/insumos-oficina/reverse-auction")}>
+                          Reverse auction
+                        </li>
+                      </ul>
+                    )}
                   </li>
                 </ul>
               )}

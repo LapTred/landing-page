@@ -47,11 +47,17 @@
 
 .nav__item:hover {
   background-color: #ca2128;
+  cursor: pointer;
 }
+
 
 .nav__link {
   color: var(--title-color);
   transition: color 0.4s;
+}
+
+.nav__link:hover {
+  cursor: pointer;
 }
 
 .nav__close {
@@ -107,16 +113,17 @@
   padding: 0;
   margin: 0;
   z-index: 1000;
-  display: none; /* Initially hidden */
+  display: none; /* Inicialmente oculto */
   max-width: 700px;
   min-width: 300px;
 }
 
 .nav__item:hover .dropdown {
-  display: block; /* Show dropdown on hover */
+  display: block; /* Mostrar dropdown al pasar el mouse */
 }
 
 .dropdown__item {
+  position: relative; /* Asegura que el item sea posicionado correctamente */
   padding: 10px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -124,7 +131,27 @@
   word-wrap: break-word;
 }
 
-.dropdown__item:hover {
-  background-color: #f1f1f1;
+.submenu {
+  position: absolute;
+  top: 0;
+  left: 100%; /* Posición a la derecha del elemento padre */
+  display: none; /* Inicialmente oculto */
+  background-color: #f1f1f1; /* Fondo del submenu */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
 }
 
+.dropdown__item:hover .submenu {
+  display: block; /* Mostrar submenu al pasar el mouse */
+}
+
+.submenu__item {
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #333333; /* Color del texto */
+  transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+
+.submenu__item:hover {
+  background-color: #f1f1f1; /* Color de fondo al pasar el mouse */
+}

@@ -51,7 +51,7 @@ const About = () => {
                     </div>
                     <div class="contentBox">
                         <div id="ninth" class="buttonBox">
-                            <button>UNIRSE</button>
+                            <button>REGISTRO PARA PROVEEDORES</button>
                         </div>                      
                     </div>
                 </div>

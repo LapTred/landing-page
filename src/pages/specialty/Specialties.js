@@ -3,21 +3,23 @@ import background from "../../assets/Specialty/Imagen-de-fondo2.jpg";
 import "./Specialty.css";
 import Asset17 from "../../assets/Specialty/Asset17.png";
 import Asset18 from "../../assets/Specialty/Asset18.png";
-
-// Importar los datos de especialidades desde specialtiesData.js
 import { specialties } from "./specialtiesData";
 
 const Specialty = () => {
-    const [visibleInfo, setVisibleInfo] = useState(null);
+    const [visibleInfo, setVisibleInfo] = useState([]);
 
     const toggleInfo = (id) => {
-        setVisibleInfo(visibleInfo === id ? null : id);
+        setVisibleInfo((prevVisibleInfo) =>
+            prevVisibleInfo.includes(id)
+                ? prevVisibleInfo.filter((visibleId) => visibleId !== id)
+                : [...prevVisibleInfo, id]
+        );
     };
 
     return (
         <div className="specialty">
             <div className="specialty__background-container">
-                <img src={background} alt="Background" className="specialty__background"/>
+                <img src={background} alt="Background" className="specialty__background" />
                 <div className="specialty__overlay">
                     <div className="specialty__text-container">
                         <h1>VALORAMOS TU EXPERIENCIA</h1>
@@ -40,17 +42,17 @@ const Specialty = () => {
                 {specialties.map((table) => (
                     <div key={table.id}>
                         <div className="specialty__table-title" onClick={() => toggleInfo(table.id)}>
-                            <img src={visibleInfo === table.id ? Asset17 : Asset18} alt="Icon" className="specialty__icon" />
+                            <img src={visibleInfo.includes(table.id) ? Asset17 : Asset18} alt="Icon" className="specialty__icon" />
                             <h1>{table.title}</h1>
                         </div>
-                        {visibleInfo === table.id && (
+                        {visibleInfo.includes(table.id) && (
                             <div className="table-container">
-                                <table className="specialty__table">                                    
+                                <table className="specialty__table">
                                     <tbody>
                                         {table.content && table.content.map((item, index) => (
                                             <tr key={item.id} className={index % 2 === 0 ? "even-row" : "odd-row"}>
-                                                <td style={{width: "30%", fontWeight:700}}>{item.title}</td>
-                                                <td style={{width: "70%"}}>{item.description}</td>
+                                                <td style={{ width: "35%", fontWeight: 700 }}>{item.title}</td>
+                                                <td style={{ width: "65%" }}>{item.description}</td>
                                             </tr>
                                         ))}
                                     </tbody>
