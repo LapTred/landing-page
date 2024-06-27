@@ -11,7 +11,7 @@
   --first-color: hsl(28, 88%, 62%);
   --title-color: hsl(0, 0%, 95%);
   --text-color: hsl(0, 0%, 75%);
-  --body-color: hsl(0, 0%, 6%);
+  --body-color: #000000;
   --body-font: "Karla", sans-serif;
   --second-font: "Karla", cursive;
   --h2-font-size: 1.25rem;
@@ -31,4 +31,95 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.margin0{
+  margin: 0;
+}
+/*Animacion*/
+.fastTransition{
+  transition: 0.3s;
+}
+
+.fadeInUpAbsolute{
+  animation: fadeInUpCnter 0.8s linear;
+}
+.fadeIn{
+  animation: fadeIn 0.8s linear;
+}
+
+@keyframes fadeInUpCnter {
+  0% {
+    opacity: 0;
+    transform: translate(0%, 40%);
+  }
+  50%{
+    transform: translate(0%, 20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0%, 0%);
+  }
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hide{
+  display: none;
+}
+
+/*align css*/
+  .centradoTotal{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+  }
+
+/*flexbox*/
+.flex{
+  display: flex;
+}
+.column{
+  flex-direction: column;
+}
+.spaceAround{
+  justify-content: space-around;
+}
+.flexEnd{
+  justify-content: flex-end;
+}
+.centerItems{
+  align-items: center;
+}
+.spaceBetween{
+  justify-content: space-between;
+}
+.wrap{
+  flex-wrap: wrap;
+}
+.centerContent{
+  justify-content: center;
+}
+.flexEnd{
+  align-items: flex-end;
+}
+
+/*font*/
+.bold{
+  font-weight: bold;;
 }

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
 import "./Navbar.css";
 import Logo from "../../assets/Landing/AtisaGroup-bco.svg";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation(); // Hook para obtener la ruta actual
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null); // Estado para controlar el dropdown activo
   const [showSubmenu, setShowSubmenu] = useState(false); // Estado para controlar el submenu principal
@@ -42,25 +43,27 @@ const Navbar = () => {
     setActiveDropdown(dropdownName);
   };
 
-  const handleDropdownLeave = () => {
-    setActiveDropdown(null);
-  };
+  // Función para determinar si una ruta está activa
+  const isActive = (path) => location.pathname === path;
 
   return (
     <header className="header">
       <nav className="nav container">
-        <NavLink to="/" className="nav__logo">
-          <img src={Logo} alt="AtisaGroup Logo" className="nav__logo-img" />
-        </NavLink>
-        <NavLink to="/" className="nav__logo">
-          CADENA DE SUMINISTROS
-        </NavLink>
+        <div className="nav">
+          <NavLink to="/about" className="nav__logo">
+            <img src={Logo} alt="AtisaGroup Logo" className="nav__logo-img" />
+          </NavLink>
+          <NavLink to="/about" className="nav__logo-text">
+            CADENA DE SUMINISTROS
+          </NavLink>
+        </div>
+        
         <div className={"nav__menu"} id="nav-menu">
           <ul className="nav__list">
-            <li className="nav__item" onClick={() => handleNavigation("/about")}>
+            <li className={`nav__item ${isActive("/about") ? "active" : ""}`} onClick={() => handleNavigation("/about")}>
               <span className="nav__link">QUIENES SOMOS</span>
             </li>
-            <li className="nav__item" onClick={() => handleNavigation("/especialidades")}>
+            <li className={`nav__item ${isActive("/especialidades") ? "active" : ""}`} onClick={() => handleNavigation("/especialidades")}>
               <span className="nav__link">ESPECIALIDADES</span>
             </li>
             <li
@@ -75,7 +78,6 @@ const Navbar = () => {
                 <ul className="dropdown" onMouseEnter={() => handleDropdownEnter("proveedores")}>
                   <li
                     className="dropdown__item"
-                    onClick={() => handleNavigation("/construccion")}
                     style={{ backgroundColor: "#AA2B27" }}
                     onMouseOver={() => handleSubmenuEnter()}
                     onMouseOut={() => handleSubmenuLeave()}
@@ -83,10 +85,10 @@ const Navbar = () => {
                     CONSTRUCCIÓN
                     {activeDropdown === "proveedores" && showSubmenu && (
                       <ul className="submenu" style={{ top: "0", left: "100%" }}>
-                        <li className="submenu__item" onClick={() => handleNavigation("/construccion/registro")}>
+                        <li className="submenu__item" onClick={() => handleNavigation("/register")}>
                           Registro
                         </li>
-                        <li className="submenu__item" onClick={() => handleNavigation("/construccion/reverse-auction")}>
+                        <li className="submenu__item" onClick={() => handleNavigation("/reverse-auction")}>
                           Reverse auction
                         </li>
                       </ul>
@@ -102,10 +104,10 @@ const Navbar = () => {
                     MATERIALES P/CONSTRUCCIÓN
                     {activeDropdown === "proveedores" && showSubmenu && (
                       <ul className="submenu" style={{ top: "0", left: "100%" }}>
-                        <li className="submenu__item" onClick={() => handleNavigation("/materiales-construccion/registro")}>
+                        <li className="submenu__item" onClick={() => handleNavigation("/register")}>
                           Registro
                         </li>
-                        <li className="submenu__item" onClick={() => handleNavigation("/materiales-construccion/reverse-auction")}>
+                        <li className="submenu__item" onClick={() => handleNavigation("/reverse-auction")}>
                           Reverse auction
                         </li>
                       </ul>
@@ -121,10 +123,10 @@ const Navbar = () => {
                     REFACCIONES MAQ. PESADA
                     {activeDropdown === "proveedores" && showSubmenu && (
                       <ul className="submenu" style={{ top: "0", left: "100%" }}>
-                        <li className="submenu__item" onClick={() => handleNavigation("/refacciones-maquinaria/registro")}>
+                        <li className="submenu__item" onClick={() => handleNavigation("/register")}>
                           Registro
                         </li>
-                        <li className="submenu__item" onClick={() => handleNavigation("/refacciones-maquinaria/reverse-auction")}>
+                        <li className="submenu__item" onClick={() => handleNavigation("/reverse-auction")}>
                           Reverse auction
                         </li>
                       </ul>
@@ -140,10 +142,10 @@ const Navbar = () => {
                     INSUMOS P/OFICINA
                     {activeDropdown === "proveedores" && showSubmenu && (
                       <ul className="submenu" style={{ top: "0", left: "100%" }}>
-                        <li className="submenu__item" onClick={() => handleNavigation("/insumos-oficina/registro")}>
+                        <li className="submenu__item" onClick={() => handleNavigation("/register")}>
                           Registro
                         </li>
-                        <li className="submenu__item" onClick={() => handleNavigation("/insumos-oficina/reverse-auction")}>
+                        <li className="submenu__item" onClick={() => handleNavigation("/reverse-auction")}>
                           Reverse auction
                         </li>
                       </ul>
@@ -152,10 +154,10 @@ const Navbar = () => {
                 </ul>
               )}
             </li>
-            <li className="nav__item" onClick={() => handleNavigation("/contact")}>
+            <li className={`nav__item ${isActive("/contact") ? "active" : ""}`} onClick={() => handleNavigation("/contact")}>
               <span className="nav__link">CONTACTO</span>
             </li>
-            <li className="nav__item" onClick={() => handleNavigation("/location")}>
+            <li className={"nav__item"}>
               <span className="nav__link">ESP|ENG</span>
             </li>
           </ul>

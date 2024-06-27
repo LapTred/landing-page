@@ -18,11 +18,16 @@
 
 .nav__logo {
   color: var(--title-color);
-  transition: color 0.4s;
+  display: flex;  
+  border-right: 2px solid #AA2B27; /* Línea roja debajo del texto */
 }
 
-.nav__toggle,
-.nav__close {
+.nav__logo-text{
+  color: var(--title-color);
+  padding: 10px;
+}
+
+.nav .nav__toggle, .nav__close {
   font-size: 1.5rem;
   color: var(--title-color);
   cursor: pointer;
@@ -50,6 +55,13 @@
   cursor: pointer;
 }
 
+.nav__item.active .nav__link {
+  color: white; /* Cambia el color a tu preferencia */
+}
+
+.nav__item.active{
+  background-color: #666666;
+}
 
 .nav__link {
   color: var(--title-color);
@@ -153,5 +165,5 @@
 }
 
 .submenu__item:hover {
-  background-color: #f1f1f1; /* Color de fondo al pasar el mouse */
+  background-color: #B3B3B3; /* Color de fondo al pasar el mouse */
 }

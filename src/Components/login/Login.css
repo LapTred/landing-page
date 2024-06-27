@@ -1,0 +1,142 @@
+.login {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login__container{
+    margin-top: 15px;
+    width: 80%;
+}
+
+.login__text-container p {
+    font-size: 1.1em;
+    margin: 0;
+    word-wrap: break-word;
+    display: inline-block;
+    width: 100%;
+}
+
+.login__text-container {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;   
+}
+
+/*Form*/
+.login__form-container {
+    width: 100%;
+    padding-top: 30px;    
+    border-top: 2px solid #E6E6E6; 
+}
+img.atisaImg {
+    width: 15%;
+}
+h1.formTile {
+    margin: 0;
+}
+p.formText {
+    text-align: center;
+}
+.errorMsg {
+    width: 89%;
+    text-align: center;
+    border: 2px solid #ef362c;
+    background-color: #FF6961;
+    margin-bottom: 15px;
+}
+/*inputs*/
+.TextInput {
+    font-size: 16px;
+    border-radius: 7px;
+    height: 45px;
+    border: 2px solid #E6E6E6;
+    background-color: #E6E6E6;
+    padding-left: 10px;
+    color: #475a69;
+    width: 100%;
+    font-family: var(--body-font);
+}
+.TextInput:focus {
+    outline: 2px solid #557691 !important;
+}
+.login__form {
+    align-items: flex-end;
+    width: 30%;
+    margin: auto;
+    margin-bottom: 30px;
+}
+.login__form label {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    font-weight: 500;
+    width: 150px;
+    justify-content: flex-end;
+}
+
+.register-link {
+    text-decoration: underline;
+    color: inherit; /* Mantiene el color actual del texto, o puedes cambiarlo a tu preferencia */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el enlace */
+}
+
+.register-link:hover {
+    color: #007BFF; /* Cambia el color al pasar sobre el enlace, opcional */
+}
+
+.login__text {
+    display: flex;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+}
+.login__text-password{
+    margin-bottom: 10px;
+    color: #475a69;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+button.inputBtn {
+    font-size: 16px;
+    background-color: #CA2128;
+    color: white;
+    border: 0;
+    height: 40px;
+    border-radius: 5px;
+    width: 30%;
+    font-family: var(--body-font);
+}
+.inputBtn:hover {
+    cursor: pointer;
+    background-color: #6d8497;
+}
+.inputWrapper {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+/*MOBILE CSS*/
+@media only screen and (max-width: 912px) {
+    .imageContainer {
+        width: 0;
+    }
+    .login__form-container {
+        width: 90%;
+        max-width: 600px;
+        margin: auto;
+    }
+    .login__form{
+        width: 100%;
+    }
+    .login__container {
+        padding-top: 100px;
+        padding-bottom: 100px;
+        width: 70%;
+    }
+}

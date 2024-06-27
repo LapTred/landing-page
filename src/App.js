@@ -1,11 +1,12 @@
 import React from "react";
 import "./App.css";
-import Navbar from "./Components/navbar/Navbar.js";
+import Navbar from "./Components/Navbar/Navbar.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home.js";
 import About from "./pages/about/About.js";
 import Specialty from "./pages/specialty/Specialties.js";
 import Footer from './Components/footer/Footer.js'; 
+import Login from "./Components/login/Login.js"
 
 const App = () => {
  return (
@@ -13,10 +14,10 @@ const App = () => {
      <Navbar />
      <main className="main-content">
        <Routes>
-         <Route path="/" element={<Home />} />
-         <Route path="/about" element={<About />} />         
-         <Route path="/especialidades" element={<Specialty />} />
-         {/* Define other routes that you need*/}
+         <Route exact path="/" element={<Home />} />
+         <Route exact path="/about" element={<About />} />         
+         <Route exact path="/especialidades" element={<Specialty />} />
+         <Route exact path="/register" element={<Login />} />
        </Routes>
      </main>
      <Footer />
