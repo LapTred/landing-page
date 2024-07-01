@@ -1,6 +1,5 @@
 /* Footer.css */
 .footer {
-    position: fixed;
     left: 0;
     bottom: 0;
     background-color: black;
@@ -10,5 +9,4 @@
     width: 100%;
     bottom: 0;
     font-size: 12px; /* letras chicas */
-    z-index: 1000;
 }

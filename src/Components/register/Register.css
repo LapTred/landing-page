@@ -1,0 +1,136 @@
+.register{
+    display: flex;
+}
+.register__container-left {
+    position: relative;
+    width: 50%;
+    height: 100vh;
+    overflow: hidden; /* Oculta el contenido que exceda la altura del contenedor */
+}
+
+.register__background {
+    width: 100%; /* Asegura que la imagen abarque el 100% del ancho */
+    height: 100%; /* Asegura que la imagen abarque el 100% de la altura del contenedor */
+    object-fit: cover; /* Cubre el área del contenedor y recorta cualquier contenido adicional */
+    display: block; /* Asegura que la imagen se comporte como un bloque y tome todo el ancho disponible */
+}
+
+.register__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white; /* Asegúrate de que el texto sea visible sobre la imagen */
+    background: rgba(0, 0, 0, 0.7); /* Fondo semitransparente para mejor legibilidad */
+    display: flex;
+    flex-direction: column;
+}
+
+.register__text-container {
+    width: 50%; /* Ajusta el ancho del contenedor de texto */
+    max-width: 900px; /* Ajusta el valor según el ancho deseado */
+    text-align: justify; /* Justifica el texto del párrafo */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.register__text-container h1 {
+    font-size: 2em; /* Aumenta el tamaño de la fuente */
+    font-weight: 400;
+    display: inline-block; /* Asegura que el encabezado tome el ancho del contenedor */
+    width: 100%;
+    text-align: justify;
+}
+
+.register__red-line{
+    width: 50%;
+    border-bottom: 3px solid #AA2B27; /* Línea roja debajo del texto */
+}
+
+.register__text-container p {
+    font-size: 1.1em;
+    margin: 0;
+    word-wrap: break-word; /* Permite que el texto se ajuste si es necesario */
+    display: inline-block; /* Asegura que el párrafo se distribuya correctamente */
+    width: 100%; /* Asegura que el párrafo tome el mismo ancho que el encabezado */
+}
+
+.register__container-right {
+    position: relative;
+    width: 50%;
+    height: 100vh;
+    padding: 3rem;
+}
+
+.register__container-scroll{
+    overflow-y: auto; /* Oculta el contenido que exceda la altura del contenedor */
+    height: 100%;
+    padding: 2rem;
+}
+
+.register__formulario-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+}
+
+.register__form {
+    width: 100%;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.register__link {
+    color: blue;
+    text-decoration: underline;
+}
+
+.register__inputWrapper {
+    width: 100%;
+    align-items: start;
+}
+
+.register__label{
+    width: 30%;
+    font-size: 18px;
+}
+.register__input{
+    margin-top: 2px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.register__input p {
+    color: gray;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.register__gray-line{
+    border-bottom: 2px solid #E6E6E6; /* Línea roja debajo del texto */
+    margin-bottom: 10px;
+}
+
+/*inputs*/
+.register__textInput {
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid #929292;
+    padding-left: 10px;
+    width: 100%;
+    font-family: var(--body-font);
+}
+.register__textInput:focus {    
+    outline: 2px solid #717171 !important;
+}

@@ -96,7 +96,6 @@ const Navbar = () => {
                   </li>
                   <li
                     className="dropdown__item"
-                    onClick={() => handleNavigation("/materiales-construccion")}
                     style={{ backgroundColor: "#881F1A" }}
                     onMouseOver={() => handleSubmenuEnter()}
                     onMouseOut={() => handleSubmenuLeave()}
@@ -115,7 +114,6 @@ const Navbar = () => {
                   </li>
                   <li
                     className="dropdown__item"
-                    onClick={() => handleNavigation("/refacciones-maquinaria")}
                     style={{ backgroundColor: "#680F06" }}
                     onMouseOver={() => handleSubmenuEnter()}
                     onMouseOut={() => handleSubmenuLeave()}
@@ -134,7 +132,6 @@ const Navbar = () => {
                   </li>
                   <li
                     className="dropdown__item"
-                    onClick={() => handleNavigation("/insumos-oficina")}
                     style={{ backgroundColor: "#470000" }}
                     onMouseOver={() => handleSubmenuEnter()}
                     onMouseOut={() => handleSubmenuLeave()}
