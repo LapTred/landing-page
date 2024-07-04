@@ -157,6 +157,9 @@ const Navbar = () => {
             <li className={"nav__item"}>
               <span className="nav__link">ESP|ENG</span>
             </li>
+            <li className={`nav__item ${isActive("/login") ? "active" : ""}`} onClick={() => handleNavigation("/login")}>
+              <span className="nav__link">INICIAR SESIÓN</span>
+            </li>
           </ul>
           <div className="nav__close" id="nav-close">
             <IoClose />

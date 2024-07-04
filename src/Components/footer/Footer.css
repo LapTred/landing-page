@@ -1,5 +1,8 @@
 /* Footer.css */
 .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     left: 0;
     bottom: 0;
     background-color: black;
@@ -9,4 +12,5 @@
     width: 100%;
     bottom: 0;
     font-size: 12px; /* letras chicas */
+    height: 2.5rem;
 }
