@@ -3,14 +3,15 @@ import axios from 'axios';
 import "./Register.css";
 import background from "../../assets/Landing/Registro.JPG";
 import { specialties } from "../specialty/specialtiesData";
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 import Uploader from '../uploader/Uploader.js';
 
 const Register = () => {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('Mexico'); // Estado para el país seleccionado
-  const [value, setValue] = useState()
+  const [phone1, setPhone1] = useState()
+  const [phone2, setPhone2] = useState()
   const documentList = [
     "Curriculum de la empresa (pdf)",
     "Catálogo de productos (proveedores) (pdf)",
@@ -126,7 +127,7 @@ const Register = () => {
                 </div>                            
                 <div className="register__input column">
                   <textarea type="text" className="register__textInput" placeholder="1.-&#10;2.-&#10;3.-&#10;" />
-                  <p>Favor de escribirlo tal cual viene en su Constancia de Situación Fiscal, sin guiones ni espacios. (Ej. CDB750806B2N)</p>
+                  <p>De acuerdo a la especialidad elegida, favor de indicar 3 (tres) principales alcances de forma general.</p>
                 </div>
               </div>                
 
@@ -147,12 +148,13 @@ const Register = () => {
                   <p>Teléfono *</p>
                 </div>                            
                 <div className="register__input column">
-                  <PhoneInput
-                    defaultCountry='MX'
+                  <PhoneInput                    
+                    countryCodeEditable = {false}
+                    country="mx"
                     placeholder="Enter phone number"
-                    className="register__textInput"
-                    value={value}
-                    onChange={setValue}
+                    className="register__phoneInput"
+                    value={phone1}
+                    onChange={setPhone1}
                   />
                   <p>Número de teléfono del ejecutivo de ventas</p>
                 </div>                    
@@ -182,11 +184,12 @@ const Register = () => {
                 </div>                            
                 <div className="register__input column">
                   <PhoneInput
-                    defaultCountry='MX'
+                    countryCodeEditable = {false}
+                    country="mx"
                     placeholder="Enter phone number"
-                    className="register__textInput"
-                    value={value}
-                    onChange={setValue}
+                    className="register__phoneInput"
+                    value={phone2}
+                    onChange={setPhone2}
                   />
                   <p>Número de teléfono del director / gerente</p>
                 </div>                    
@@ -217,7 +220,7 @@ const Register = () => {
                   </div>                            
                   <div className="register__input column">                      
                       <Uploader/> 
-                      <p>Sube hasta 5 archivos en este apartado de hasta 20MB</p>
+                      <p>Sube hasta 11 archivos en este apartado de hasta 40MB</p>
                   </div>
               </div>
             </form>                    

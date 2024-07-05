@@ -131,7 +131,7 @@
     font-size: 16px;
     padding: 5px;
     border-radius: 5px;
-    border: 2px solid #929292;
+    border: 2px solid #d3d3d3;
     padding-left: 10px;
     width: 100%;
     font-family: var(--body-font);
@@ -139,6 +139,13 @@
 }
 .register__textInput:focus {    
     border: 2px solid black;
+}
+
+.form-control {    
+    width: 100% !important;
+    
+    border-radius: 5px !important;
+    border: 2px solid #d3d3d3 !important;
 }
 
 .register__input textarea {

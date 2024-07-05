@@ -31,7 +31,7 @@ const Login = () => {
                         </p>
                         <button className="inputBtn fastTransition" type='submit'>Ingresar</button>
                     </form>
-                    <p className="flex login__form flexEnd login__text">
+                    <p className="login__form">
                         SI AÚN NO ERES USUARIO,&nbsp;
                         <NavLink to="/register" className="register-link">
                         REGÍSTRATE AQUÍ

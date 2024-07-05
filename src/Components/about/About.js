@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from 'react-router-dom';
 import background from "../../assets/Landing/Imagen-de-fondo.jpg";
 import "./About.css";
 import Asset1 from "../../assets/Landing/Asset1.png";
@@ -49,9 +50,11 @@ const About = () => {
                             <p>PROYECTOS</p>                   
                         </div>
                     </div>
-                    <div class="contentBox">
-                        <div id="ninth" class="buttonBox">
-                            <button>REGISTRO PARA PROVEEDORES</button>
+                    <div className="contentBox">
+                        <div className="buttonBox">
+                            <NavLink to="/register" id="ninth" >
+                                <button>REGISTRO PARA PROVEEDORES</button>
+                            </NavLink>
                         </div>                      
                     </div>
                 </div>

@@ -11,8 +11,9 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  position: relative;
-  height: var(--header-height);
+  position: relative;  
+  height: calc(var(--header-height) + 1rem);
+  
 }
 
 .nav__logo {

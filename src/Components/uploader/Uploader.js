@@ -27,12 +27,9 @@ function Uploader() {
             hidden
             multiple
             onChange={handleFileChange}
-          />
-          
-            
-              <MdCloudUpload color="#1475cf" size={60} />
-              <p>Browse Files to upload (PDF or Images)</p>
-            
+          />         
+          <MdCloudUpload color="#1475cf" size={60} />
+          <p>Buscar archivos para subir (PDF o Imagen)</p>
         </label>
       </form>
 
