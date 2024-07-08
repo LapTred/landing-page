@@ -99,9 +99,9 @@ const Register = () => {
               </div>   
 
               <div className="register__inputWrapper">                            
-                  <div className="register__label">
-                      <p>Especialidad *</p>
-                  </div>                            
+                <div className="register__label">
+                    <p>Especialidad *</p>
+                </div>                            
                 <div className="register__input column">
                   <select className="register__textInput">
                   <option value="" disabled selected>Selecciona tu especialidad</option>
