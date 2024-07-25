@@ -117,8 +117,9 @@
 
 .register__input p {
     color: gray;
-    font-size: 12px;
+    font-size: 14px;
     margin-bottom: 10px;
+    text-align: justify;
 }
 
 .register__gray-line{
@@ -151,4 +152,26 @@
 .register__input textarea {
     height: 110px;
 }
+.register__select-first{
+    width: 100%;
+}
+.register__select{
+    width: 85%;
+}
+.register__input-select{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.register__remove-button{
+    width: 10% !important;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
 
+.register__document-section p {
+    margin-top: 10px;
+}

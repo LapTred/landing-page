@@ -5,27 +5,14 @@ import background from "../../assets/Landing/Registro.JPG";
 import { specialties } from "../specialty/specialtiesData";
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-import Uploader from '../uploader/Uploader.js';
+import RegisterUploader from './RegisterUploader.js';
+import RegisterSpecialities from "./RegisterSpecialities.js";
 
 const Register = () => {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('Mexico'); // Estado para el país seleccionado
   const [phone1, setPhone1] = useState()
   const [phone2, setPhone2] = useState()
-  const documentList = [
-    "Curriculum de la empresa (pdf)",
-    "Catálogo de productos (proveedores) (pdf)",
-    "Solicitud de crédito y requisitos (proveedores) (pdf)",
-    "Acta Constitutiva (aplica solamente cuando es persona moral) (pdf)",
-    "Poder Legal (aplica solamente cuando es persona moral) (pdf)",
-    "INE representante legal (.jpg /. png)",
-    "Constancia de Situación Fiscal (pdf)",
-    "REPSE (pdf)",
-    "Tarjeta Patronal (.jpg / .png)",
-    "Última liquidación IMSS (pdf)",
-    "Opinión de cumplimiento IMSS, SA (pdf)"
-  ];
-
   useEffect(() => {
     axios.get('https://restcountries.com/v3.1/all')
       .then(response => {
@@ -97,38 +84,14 @@ const Register = () => {
                       <p>Favor de escribirlo tal cual viene en su Constancia de Situación Fiscal</p>
                   </div>                            
               </div>   
-
+                  
               <div className="register__inputWrapper">                            
                 <div className="register__label">
                     <p>Especialidad *</p>
-                </div>                            
-                <div className="register__input column">
-                  <select className="register__textInput">
-                  <option value="" disabled selected>Selecciona tu especialidad</option>
-                  {specialties.map(category => (
-                    <optgroup key={category.id} label={category.title}>
-                    {category.content.map(specialty => (
-                      <option key={specialty.id} value={specialty.title}>{specialty.title}</option>
-                    ))}
-                    </optgroup>
-                  ))}
-                  </select>
-                  <p>Para seleccionar la especialidad adecuada. Te compartimos un documento que contiene una descripción de las especialidades disponibles.</p>          
-                </div>                            
-              </div>  
-              <div className="register__inputWrapper">                            
-                <div className="register__label">
-                  <a className="register__link" href="https://www.atisa.com/cadena_de_suministros/tabla_especialidades.pdf" target="_blank" rel="noopener noreferrer">Tabla de Especialidades</a>
-                </div>     
-              </div>     
-              <div className="register__inputWrapper">                            
-                <div className="register__label">
-                  <p>Alcances *</p>
-                </div>                            
-                <div className="register__input column">
-                  <textarea type="text" className="register__textInput" placeholder="1.-&#10;2.-&#10;3.-&#10;" />
-                  <p>De acuerdo a la especialidad elegida, favor de indicar 3 (tres) principales alcances de forma general.</p>
-                </div>
+                </div>                          
+                <div className="register__input column">     
+                  <RegisterSpecialities/>                          
+                </div>                          
               </div>                
 
               <h2>II.- DATOS DE CONTACTO</h2>                 
@@ -205,24 +168,7 @@ const Register = () => {
               </div> 
               <h2>III.- DOCUMENTOS</h2>              
               <div className="register__gray-line"></div>
-              <div className="register__label-document column">   
-                <p>Favor de subir y enviar los documentos enlistados a continuación en caso de aplicar según sea el giro y la especialidad de su empresa.</p>
-                <br></br>
-                <div>
-                  {documentList.map((doc, index) => (
-                    <p key={index}>{index + 1}. {doc}</p>
-                  ))}
-                </div>  
-              </div> 
-              <div className="register__inputWrapper">                            
-                  <div className="register__label">
-                      <p>Subir archivos *</p>
-                  </div>                            
-                  <div className="register__input column">                      
-                      <Uploader/> 
-                      <p>Sube hasta 11 archivos en este apartado de hasta 40MB</p>
-                  </div>
-              </div>
+              <RegisterUploader/>
             </form>                    
           </div>
         </div>        

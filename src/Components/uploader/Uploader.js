@@ -1,14 +1,18 @@
+
 import { useState } from 'react';
 import './Uploader.css';
 import { MdCloudUpload, MdDelete } from 'react-icons/md';
 import { AiFillFileImage } from 'react-icons/ai';
 
-function Uploader() {
+function Uploader({ onUpload }) {
   const [files, setFiles] = useState([]);
 
   const handleFileChange = ({ target: { files: newFiles } }) => {
     const updatedFiles = Array.from(newFiles);
     setFiles(prevFiles => [...prevFiles, ...updatedFiles]);
+    if (updatedFiles.length > 0) {
+      onUpload(updatedFiles);
+    }
   };
 
   const handleDelete = index => {
@@ -25,9 +29,8 @@ function Uploader() {
             id="fileInput"
             className="input-field"
             hidden
-            multiple
             onChange={handleFileChange}
-          />         
+          />
           <MdCloudUpload color="#1475cf" size={60} />
           <p>Buscar archivos para subir (PDF o Imagen)</p>
         </label>

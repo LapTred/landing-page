@@ -7,7 +7,6 @@ import Specialty from "./Components/specialty/Specialties.js";
 import Footer from './Components/footer/Footer.js'; 
 import Login from "./Components/login/Login.js";
 import Register from "./Components/register/Register.js";
-import RegisterPrueba from "./Components/register/RegisterPrueba.js";
 import Reverse from "./Components/reverse-auction/Reverse-auction.js"
 
 const App = () => {
@@ -22,8 +21,6 @@ const App = () => {
             <Route exact path="/especialidades" element={<Specialty />} />
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/login" element={<Login />} />
-            
-            <Route exact path="/registerP" element={<RegisterPrueba />} />
           </Routes>
         </main>
         <Footer />

@@ -53,7 +53,7 @@ const About = () => {
                     <div className="contentBox">
                         <div className="buttonBox">
                             <NavLink to="/register" id="ninth" >
-                                <button>REGISTRO PARA PROVEEDORES</button>
+                                <button className="about__button">REGISTRO PARA PROVEEDORES</button>
                             </NavLink>
                         </div>                      
                     </div>
