@@ -88,14 +88,15 @@ const SpecialtiesForm = () => {
               />
             </div>
             {index === selectedSpecialties.length - 1 && (
-            <p>De acuerdo a la especialidad elegida, favor de indicar 3 (tres) principales alcances de forma general.</p>
+              <p>De acuerdo a la especialidad elegida, favor de indicar 3 (tres) principales alcances de forma general.</p>
             )}
-            <br></br>
+            {index !== selectedSpecialties.length - 1 && (
+              <br></br>
+            )}
           </div>
         </div>
       ))}
-
-      <button type="button" onClick={handleAddSpecialty} disabled={selectedSpecialties.length >= specialties.length}>
+      <button class="register__button-specialities" type="button" onClick={handleAddSpecialty} disabled={selectedSpecialties.length >= specialties.length}>
         Añadir otra especialidad
       </button>
     </div>

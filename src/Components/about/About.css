@@ -237,6 +237,12 @@
     }
 }
 
+@media screen and (max-width:720px) {
+    .about__text-container h1{
+        font-size: 30px;
+    }
+}
+
 .about__work:hover {
     color: white;
 }

@@ -112,6 +112,11 @@ code {
 .centerItems{
   align-items: center;
 }
+
+.justifyRight{
+  justify-content: right;
+}
+
 .spaceBetween{
   justify-content: space-between;
 }

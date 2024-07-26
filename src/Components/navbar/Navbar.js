@@ -10,6 +10,7 @@ const Navbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null); // Estado para controlar el dropdown activo
   const [showSubmenu, setShowSubmenu] = useState(false); // Estado para controlar el submenu principal
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false); // Estado para controlar el menú móvil
 
   // Función para manejar la navegación y cerrar los menús desplegables
   const handleNavigation = (path) => {
@@ -17,6 +18,7 @@ const Navbar = () => {
     setDropdownOpen(false); // Cerrar dropdown principal en la navegación
     setShowSubmenu(false); // Cerrar submenu principal en la navegación
     setActiveDropdown(null); // Limpiar el dropdown activo en la navegación
+    setMobileMenuOpen(false); // Cerrar menú móvil en la navegación
   };
 
   // Manejar entrada y salida del dropdown principal
@@ -46,6 +48,11 @@ const Navbar = () => {
   // Función para determinar si una ruta está activa
   const isActive = (path) => location.pathname === path;
 
+  // Función para manejar el clic en el ícono de menú móvil
+  const handleMobileMenuToggle = () => {
+    setMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <header className="header">
       <nav className="nav container">
@@ -58,7 +65,7 @@ const Navbar = () => {
           </NavLink>
         </div>
         
-        <div className={"nav__menu"} id="nav-menu">
+        <div className={`nav__menu ${isMobileMenuOpen ? "show-menu" : ""}`} id="nav-menu">
           <ul className="nav__list">
             <li className={`nav__item ${isActive("/about") ? "active" : ""}`} onClick={() => handleNavigation("/about")}>
               <span className="nav__link">QUIENES SOMOS</span>
@@ -161,11 +168,11 @@ const Navbar = () => {
               <span className="nav__link">INICIAR SESIÓN</span>
             </li>
           </ul>
-          <div className="nav__close" id="nav-close">
+          <div className="nav__close" id="nav-close" onClick={handleMobileMenuToggle}>
             <IoClose />
           </div>
         </div>
-        <div className="nav__toggle" id="nav-toggle">
+        <div className="nav__toggle" id="nav-toggle" onClick={handleMobileMenuToggle}>
           <IoMenu />
         </div>
       </nav>

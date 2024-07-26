@@ -43,8 +43,6 @@ const Register = () => {
   return (
     <div>
       <div className="register__label-document column">
-        <p>Favor de subir y enviar los documentos enlistados a continuación en caso de aplicar según sea el giro y la especialidad de su empresa.</p>
-        <br />
         <div>
           {documentList.map((doc, index) => (
             <div key={index} className="register__document-section">
