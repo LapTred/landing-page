@@ -1,31 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import "./Register.css";
 import Uploader from '../uploader/Uploader.js';
 
-const Register = () => {
-  const documentList = [
+const RegisterUploader = ({ tipo }) => {
+  const documentList2 = [
     "Curriculum de la empresa (pdf)",
-    "Catálogo de productos (proveedores) (pdf)",
-    "Solicitud de crédito y requisitos (proveedores) (pdf)",
     "Acta Constitutiva (aplica solamente cuando es persona moral) (pdf)",
     "Poder Legal (aplica solamente cuando es persona moral) (pdf)",
     "INE representante legal (.jpg /. png)",
-    "Constancia de Situación Fiscal (pdf)",
     "REPSE (pdf)",
     "Tarjeta Patronal (.jpg / .png)",
     "Última liquidación IMSS (pdf)",
     "Opinión de cumplimiento IMSS, SA (pdf)"
   ];
 
+  const documentList1 = [
+    "Catálogo de productos (pdf)",
+    "Solicitud de crédito y requisitos (pdf)",
+    "Constancia de Situación Fiscal (pdf)"
+  ];
+
+  const [documentList, setDocumentList] = useState(documentList1);
   const [currentStep, setCurrentStep] = useState(0);
-  const [uploadedFiles, setUploadedFiles] = useState(Array(documentList.length).fill([]));
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+
+  useEffect(() => {
+    if (tipo === 'proveedor') {
+      setDocumentList(documentList1);
+    } else if (tipo === 'subcontrato') {
+      setDocumentList(documentList2);
+    }
+    setUploadedFiles(Array(documentList.length).fill([]));
+  }, [tipo]);
 
   const handleFileUpload = (index, newFiles) => {
     const updatedFiles = [...uploadedFiles];
     updatedFiles[index] = [...updatedFiles[index], ...newFiles];
     setUploadedFiles(updatedFiles);
 
-    // Encontrar el siguiente paso que necesita un archivo
     const nextStep = updatedFiles.findIndex(files => files.length === 0);
     setCurrentStep(nextStep === -1 ? documentList.length : nextStep);
   };
@@ -35,7 +48,6 @@ const Register = () => {
     updatedFiles[docIndex] = updatedFiles[docIndex].filter((_, idx) => idx !== fileIndex);
     setUploadedFiles(updatedFiles);
 
-    // Encontrar el siguiente paso que necesita un archivo
     const nextStep = updatedFiles.findIndex(files => files.length === 0);
     setCurrentStep(nextStep === -1 ? documentList.length : nextStep);
   };
@@ -47,7 +59,7 @@ const Register = () => {
           {documentList.map((doc, index) => (
             <div key={index} className="register__document-section">
               <p>{index + 1}. {doc}</p>
-              {uploadedFiles[index].map((file, fileIndex) => (
+              {uploadedFiles[index]?.map((file, fileIndex) => (
                 <div key={fileIndex} className="upload-content">
                   <a href={URL.createObjectURL(file)} target="_blank" rel="noopener noreferrer">
                     {file.name}
@@ -66,4 +78,8 @@ const Register = () => {
   );
 };
 
-export default Register;
+RegisterUploader.propTypes = {
+  tipo: PropTypes.string.isRequired,
+};
+
+export default RegisterUploader;

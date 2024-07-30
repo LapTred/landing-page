@@ -7,7 +7,7 @@ import Specialty from "./Components/specialty/Specialties.js";
 import Footer from './Components/footer/Footer.js'; 
 import Login from "./Components/login/Login.js";
 import Register from "./Components/register/Register.js";
-import Reverse from "./Components/reverse-auction/Reverse-auction.js"
+import PreRegister from "./Components/register/SubRegister.js";
 
 const App = () => {
   return (
@@ -19,7 +19,8 @@ const App = () => {
             <Route exact path="/" element={<About />} />
             <Route exact path="/about" element={<About />} />         
             <Route exact path="/especialidades" element={<Specialty />} />
-            <Route exact path="/register" element={<Register />} />
+            <Route exact path="/postregister" element={<Register />} />
+            <Route exact path="/register" element={<PreRegister />} />
             <Route exact path="/login" element={<Login />} />
           </Routes>
         </main>

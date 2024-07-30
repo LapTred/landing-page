@@ -102,6 +102,7 @@
 .register__label{
     width: 30%;
     font-size: 18px;
+    min-width: 200px;
 }
 .register__label-document{
     width: 100%;
@@ -181,8 +182,21 @@
     }
     .register__container-right{
         width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }
+@media screen and (max-width:720px) {
+    .register__inputWrapper{
+        flex-direction: column;
+    }
+    .register__input{
+        width: 100%;
+        min-width: 250px;
+    }
+
+}
+
 
 .register__button-specialities {
     appearance: none;
