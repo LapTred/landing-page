@@ -1,6 +1,7 @@
 /* Estilos generales del menú */
 .header {
   width: 100%;
+  min-width: 500px;
   top: 0;
   left: 0;
   background-color: var(--body-color);
@@ -93,6 +94,13 @@
     height: 100%;
     padding: 6rem 3rem 0;
     transition: right 0.4s;
+  }
+
+  .nav__logo-text{
+    display: none;
+  }
+  .nav__logo {
+    border:none;
   }
 
   .nav__menu.show-menu {

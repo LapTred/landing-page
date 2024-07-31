@@ -1,6 +1,7 @@
 .main-content {
   min-height: calc(100vh - 6.5rem);
   flex-grow: 1;
+  min-width: 500px;
 }
 
 .app-container {

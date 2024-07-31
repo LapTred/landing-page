@@ -72,7 +72,6 @@
     width: 100%;
     min-height: 5rem;
     height: 10rem;
-    overflow: hidden;
 }
 
 .specialty__background {
@@ -123,7 +122,6 @@
 }
 
 .specialty__client-h1 {
-    position: relative;
     display: inline-block;
     text-align: justify;
     font-size: 18px;
@@ -132,9 +130,7 @@
 }
 
 .specialty__client-container {
-    position: relative;
     width: 100%;
-    height: 5rem;
     margin: 10px;
     margin-bottom: 20px;
 }
@@ -146,9 +142,6 @@
 }
 
 .specialty__client-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     display: flex;
@@ -159,11 +152,23 @@
 }
 
 @media screen and (max-width: 1300px) {
-    .specialty__client-container {
-        height: 9rem;
-    }
 
     .specialty__text-client h1 {
         font-size: 15px;
+    }
+    .specialty__text-container h1 {
+        font-size: 2.5em;
+        font-weight: 400;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+    }
+    .specialty__client-h1 {
+        display: inline-block;
+        text-align: justify;
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        padding: 15px;
     }
 }

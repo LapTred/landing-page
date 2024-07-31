@@ -12,7 +12,7 @@ const Preregister = () => {
   const navigate = useNavigate();
 
   const options1 = [
-    { value: 'proveedor', label: 'Proveedores' },
+    { value: 'proveedor', label: 'Compras generales' },
     { value: 'subcontrato', label: 'Subcontratistas' },
   ];
 
@@ -112,6 +112,7 @@ const Preregister = () => {
                     <Select
                       className="register__select-first"
                       options={options1}
+                      isSearchable={false}
                       placeholder="Selecciona tu especialidad"
                       onChange={setSelectedOption}
                     />                      
@@ -129,6 +130,7 @@ const Preregister = () => {
                     <Select
                       className="register__select-first"
                       options={options2}
+                      isSearchable={false}
                       placeholder="Selecciona tu especialidad"
                       onChange={setSelectedOption}
                     />                      

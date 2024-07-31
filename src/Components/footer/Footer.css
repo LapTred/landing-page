@@ -13,4 +13,5 @@
     bottom: 0;
     font-size: 12px; /* letras chicas */
     height: 2.5rem;
+    min-width: 500px;
 }
