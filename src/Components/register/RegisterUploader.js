@@ -1,38 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import "./Register.css";
 import Uploader from '../uploader/Uploader.js';
 
-const RegisterUploader = ({ tipo }) => {
-  const documentList2 = [
+const RegisterUploader = ({ tipo, persona }) => {
+  const documentList1 = useMemo(() => [
+    "Catálogo de productos (pdf)",
+    "Solicitud de crédito y requisitos (pdf)",
+    "Constancia de Situación Fiscal (pdf)"
+  ], []);
+
+  const documentList2 = useMemo(() => [
     "Curriculum de la empresa (pdf)",
-    "Acta Constitutiva (aplica solamente cuando es persona moral) (pdf)",
-    "Poder Legal (aplica solamente cuando es persona moral) (pdf)",
     "INE representante legal (.jpg /. png)",
     "REPSE (pdf)",
     "Tarjeta Patronal (.jpg / .png)",
     "Última liquidación IMSS (pdf)",
     "Opinión de cumplimiento IMSS, SA (pdf)"
-  ];
+  ], []);
 
-  const documentList1 = [
-    "Catálogo de productos (pdf)",
-    "Solicitud de crédito y requisitos (pdf)",
-    "Constancia de Situación Fiscal (pdf)"
-  ];
+  const documentList3 = useMemo(() => [
+    "Curriculum de la empresa (pdf)",
+    "Acta Constitutiva (pdf)",
+    "Poder Legal (pdf)",
+    "INE representante legal (.jpg /. png)",
+    "REPSE (pdf)",
+    "Tarjeta Patronal (.jpg / .png)",
+    "Última liquidación IMSS (pdf)",
+    "Opinión de cumplimiento IMSS, SA (pdf)"
+  ], []);
 
-  const [documentList, setDocumentList] = useState(documentList1);
+  const getDocumentList = useCallback(() => {
+    if (tipo === 'proveedor') {
+      return documentList1;
+    } else if (tipo === 'subcontrato' && persona === 'moral') {
+      return documentList3;
+    } else if (tipo === 'subcontrato') {
+      return documentList2;
+    } else {
+      return [];
+    }
+  }, [tipo, persona, documentList1, documentList2, documentList3]);
+
+  const [documentList, setDocumentList] = useState(getDocumentList);
   const [currentStep, setCurrentStep] = useState(0);
-  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [uploadedFiles, setUploadedFiles] = useState(Array(getDocumentList().length).fill([]));
 
   useEffect(() => {
-    if (tipo === 'proveedor') {
-      setDocumentList(documentList1);
-    } else if (tipo === 'subcontrato') {
-      setDocumentList(documentList2);
-    }
-    setUploadedFiles(Array(documentList.length).fill([]));
-  }, [tipo]);
+    const newDocumentList = getDocumentList();
+    setDocumentList(newDocumentList);
+    setUploadedFiles(Array(newDocumentList.length).fill([]));
+  }, [getDocumentList]);
 
   const handleFileUpload = (index, newFiles) => {
     const updatedFiles = [...uploadedFiles];
@@ -80,6 +98,7 @@ const RegisterUploader = ({ tipo }) => {
 
 RegisterUploader.propTypes = {
   tipo: PropTypes.string.isRequired,
+  persona: PropTypes.string.isRequired // Si puede ser opcional
 };
 
 export default RegisterUploader;

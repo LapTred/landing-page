@@ -14,7 +14,8 @@ const Register = () => {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('Mexico'); // Estado para el país seleccionado
   const query = useQuery();
-  const tipo = query.get('tipo');
+  const tipo = query.get('tipo');  
+  const persona = query.get('persona');
 
   useEffect(() => {
     axios.get('https://restcountries.com/v3.1/all')
@@ -25,7 +26,7 @@ const Register = () => {
       .catch(error => {
         console.error('Error fetching countries:', error);
       });
-  }, []);
+  }, []);  
 
   return (
     <div className="register">
@@ -96,7 +97,7 @@ const Register = () => {
               <h2>II.- DOCUMENTOS</h2>
               <p>Favor de subir y enviar los documentos enlistados a continuación en caso de aplicar según sea el giro y la especialidad de su empresa.</p>
               <div className="register__gray-line"></div>
-              <RegisterUploader tipo={tipo}/> {/* Pasar el parámetro tipo */}
+              <RegisterUploader tipo={tipo}  persona={persona}/> {/* Pasar el parámetro tipo */}
               <div className="flex justifyRight">
                 <button className="register__button-form" type="button">
                   Enviar

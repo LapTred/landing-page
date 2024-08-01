@@ -8,7 +8,8 @@ import Select from 'react-select';
 
 const Preregister = () => {
   const [phone1, setPhone1] = useState();
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption1, setSelectedOption1] = useState(null);  
+  const [selectedOption2, setSelectedOption2] = useState(null);
   const navigate = useNavigate();
 
   const options1 = [
@@ -18,13 +19,13 @@ const Preregister = () => {
 
   const options2 = [
     { value: 'moral', label: 'Persona Moral' },
-    { value: 'física', label: 'Persona Física' },
+    { value: 'fisica', label: 'Persona Física' },
   ];
   
 
   const handleContinue = () => {
-    if (selectedOption) {
-      navigate(`/postregister?tipo=${selectedOption.value}`);
+    if (selectedOption1 && selectedOption2) {
+      navigate(`/postregister?tipo=${selectedOption1.value}&persona=${selectedOption2.value}`);
     } else {
       alert('Por favor selecciona un tipo.');
     }
@@ -113,8 +114,8 @@ const Preregister = () => {
                       className="register__select-first"
                       options={options1}
                       isSearchable={false}
-                      placeholder="Selecciona tu especialidad"
-                      onChange={setSelectedOption}
+                      placeholder="Compras generales o Subcontratista"
+                      onChange={setSelectedOption1}
                     />                      
                   </div>            
                   <p></p>             
@@ -131,8 +132,8 @@ const Preregister = () => {
                       className="register__select-first"
                       options={options2}
                       isSearchable={false}
-                      placeholder="Selecciona tu especialidad"
-                      onChange={setSelectedOption}
+                      placeholder="Persona moral o física"                      
+                      onChange={setSelectedOption2}
                     />                      
                   </div>            
                   <p></p>             
