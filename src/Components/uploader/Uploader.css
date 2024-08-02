@@ -1,39 +1,28 @@
 .uploaded-form{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px dashed #1475cf;
-    height: 100px;
+    border: 2px solid #1475cf;
     cursor: pointer;
     border-radius: 5px;
-    margin-bottom: 10px;
+    padding: 10px;
 }
   
 .uploaded-row{
-    margin: 10px 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 15px 20px;
     border-radius: 5px;
     background-color: #e9f0ff;
-    flex-direction: column;   
+    flex-direction: column;  
+    
 }
-  
-.upload-content{
-    display: flex;
-    gap:30px;
-}
-
 .input-label{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    text-align: center;    
+    cursor: pointer;
 }
 
 .input-label p{
-    font-size: 16px;
+    font-size: 18px;
 }

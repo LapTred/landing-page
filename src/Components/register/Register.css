@@ -85,7 +85,7 @@
     width: 100%;
     gap: 10px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column;        
 }
 
 .register__link {
@@ -114,6 +114,10 @@
     width: 70%;
     display: flex;
     gap: 5px;
+}
+.register__label-message{
+    font-size: 20px;
+    text-align: justify;
 }
 
 .register__input p {
@@ -174,6 +178,36 @@
 
 .register__document-section p {
     font-size: 18px;
+}
+
+.register__document-section {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    border-bottom: rgb(164, 164, 164) solid 1px;
+}
+
+.register__document-label{
+    display: flex;
+    width: 90%;
+    justify-content: space-between; 
+    padding: 15px;
+}
+
+.register__document-upload{
+    display: flex;      
+    padding-left: 10px;     
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.upload-content{
+    align-items: center;
+    display: flex;
+    gap: 10px;
+}
+.register__upload-button{
+    cursor: pointer;
 }
 
 @media screen and (max-width:1300px) {

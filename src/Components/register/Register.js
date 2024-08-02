@@ -96,7 +96,7 @@ const Register = () => {
               </div>
               <h2>II.- DOCUMENTOS</h2>
               <p>Favor de subir y enviar los documentos enlistados a continuación en caso de aplicar según sea el giro y la especialidad de su empresa.</p>
-              <div className="register__gray-line"></div>
+              
               <RegisterUploader tipo={tipo}  persona={persona}/> {/* Pasar el parámetro tipo */}
               <div className="flex justifyRight">
                 <button className="register__button-form" type="button">

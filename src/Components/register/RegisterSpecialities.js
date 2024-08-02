@@ -96,7 +96,7 @@ const SpecialtiesForm = () => {
           </div>
         </div>
       ))}
-      <button class="register__button-specialities" type="button" onClick={handleAddSpecialty} disabled={selectedSpecialties.length >= specialties.length}>
+      <button className="register__button-specialities" type="button" onClick={handleAddSpecialty} disabled={selectedSpecialties.length >= specialties.length}>
         Añadir otra especialidad
       </button>
     </div>

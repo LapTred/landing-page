@@ -2,45 +2,62 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import "./Register.css";
 import Uploader from '../uploader/Uploader.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilePdf as faFilePdfRegular, faImage as faImageRegular } from '@fortawesome/free-regular-svg-icons';
 
 const RegisterUploader = ({ tipo, persona }) => {
   const documentList1 = useMemo(() => [
-    "Catálogo de productos (pdf)",
-    "Solicitud de crédito y requisitos (pdf)",
-    "Constancia de Situación Fiscal (pdf)"
+    "Constancia de Situación Fiscal (.pdf) *",
+    "Comprobante de domicilio (.pdf) *",
+    "Catálogo de productos (.pdf)",
+    "Solicitud de crédito y requisitos (.pdf)",
+    "Curriculum de la empresa (.pdf)",
+    "Caratula bancaria (.pdf)"
   ], []);
 
   const documentList2 = useMemo(() => [
-    "Curriculum de la empresa (pdf)",
-    "INE representante legal (.jpg /. png)",
-    "REPSE (pdf)",
-    "Tarjeta Patronal (.jpg / .png)",
-    "Última liquidación IMSS (pdf)",
-    "Opinión de cumplimiento IMSS, SA (pdf)"
+    "Curriculum de la empresa (.pdf) *",
+    "INE representante legal (.jpg /. png) *",
+    "REPSE (.pdf) *",
+    "Tarjeta Patronal (.jpg / .png) *",
+    "Última liquidación IMSS (.pdf) *",
+    "Opinión de cumplimiento IMSS, SA (.pdf) *"
   ], []);
 
   const documentList3 = useMemo(() => [
-    "Curriculum de la empresa (pdf)",
-    "Acta Constitutiva (pdf)",
-    "Poder Legal (pdf)",
-    "INE representante legal (.jpg /. png)",
-    "REPSE (pdf)",
-    "Tarjeta Patronal (.jpg / .png)",
-    "Última liquidación IMSS (pdf)",
-    "Opinión de cumplimiento IMSS, SA (pdf)"
+    "Curriculum de la empresa (.pdf) *",
+    "Acta Constitutiva (.pdf) *",
+    "Poder Legal (.pdf) *",
+    "INE representante legal (.jpg /. png) *",
+    "REPSE (.pdf) *",
+    "Tarjeta Patronal (.jpg / .png) *",
+    "Última liquidación IMSS (.pdf) *",
+    "Opinión de cumplimiento IMSS, SA (.pdf) *"
+  ], []);
+
+  const documentList4 = useMemo(() => [
+    "Constancia de Situación Fiscal (.pdf) *",
+    "Comprobante de domicilio (.pdf) *",
+    "INE (.jpg / .png) *",
+    "Catálogo de productos (.pdf)",
+    "Solicitud de crédito y requisitos (.pdf)",
+    "Curriculum de la empresa (.pdf)",
+    "Caratula bancaria (.pdf)"
   ], []);
 
   const getDocumentList = useCallback(() => {
-    if (tipo === 'proveedor') {
-      return documentList1;
+    if (tipo === 'proveedor' && persona === 'fisica') {
+      return documentList4;
     } else if (tipo === 'subcontrato' && persona === 'moral') {
       return documentList3;
     } else if (tipo === 'subcontrato') {
       return documentList2;
+    } else if (tipo === 'proveedor') {
+      return documentList1;
     } else {
       return [];
     }
-  }, [tipo, persona, documentList1, documentList2, documentList3]);
+  }, [tipo, persona, documentList1, documentList2, documentList3, documentList4]);
 
   const [documentList, setDocumentList] = useState(getDocumentList);
   const [currentStep, setCurrentStep] = useState(0);
@@ -70,24 +87,48 @@ const RegisterUploader = ({ tipo, persona }) => {
     setCurrentStep(nextStep === -1 ? documentList.length : nextStep);
   };
 
+  const handleSkip = () => {
+    const nextStep = currentStep + 1;
+    setCurrentStep(nextStep >= documentList.length ? documentList.length : nextStep);
+  };
+
+  const getIcon = (doc) => {
+    if (doc.includes('.pdf')) {
+      return <FontAwesomeIcon icon={faFilePdfRegular} className="register__icon" />;
+    } else if (doc.includes('.jpg') || doc.includes('.png')) {
+      return <FontAwesomeIcon icon={faImageRegular} className="register__icon" />;
+    }
+    return null;
+  };
+
   return (
     <div>
       <div className="register__label-document column">
         <div>
+        <div className="register__gray-line"></div>
           {documentList.map((doc, index) => (
             <div key={index} className="register__document-section">
-              <p>{index + 1}. {doc}</p>
-              {uploadedFiles[index]?.map((file, fileIndex) => (
-                <div key={fileIndex} className="upload-content">
-                  <a href={URL.createObjectURL(file)} target="_blank" rel="noopener noreferrer">
-                    {file.name}
-                  </a>
-                  <button onClick={() => handleFileDelete(index, fileIndex)}>Eliminar</button>
-                </div>
-              ))}
-              {index === currentStep && (
-                <Uploader key={index} onUpload={(newFiles) => handleFileUpload(index, newFiles)} />
-              )}
+              <div className="register__document-label">
+                <p>{getIcon(doc)} {doc}</p>
+                {uploadedFiles[index]?.map((file, fileIndex) => (
+                  <div key={fileIndex} className="upload-content">
+                    <a href={URL.createObjectURL(file)} target="_blank" rel="noopener noreferrer">
+                      {file.name}
+                    </a>
+                    <button className="register__upload-button"onClick={() => handleFileDelete(index, fileIndex)}>&nbsp; x &nbsp; </button>
+                  </div>
+                ))}
+              </div>              
+              <div className="register__document-upload">               
+                {index === currentStep && (
+                  <>
+                    <Uploader key={index} onUpload={(newFiles) => handleFileUpload(index, newFiles)} />
+                    {!doc.includes('*') && (
+                      <button className="register__button-skip" onClick={handleSkip}>Omitir</button>
+                    )}
+                  </>
+                )}
+              </div>
             </div>
           ))}
         </div>
@@ -98,7 +139,7 @@ const RegisterUploader = ({ tipo, persona }) => {
 
 RegisterUploader.propTypes = {
   tipo: PropTypes.string.isRequired,
-  persona: PropTypes.string.isRequired // Si puede ser opcional
+  persona: PropTypes.string.isRequired
 };
 
 export default RegisterUploader;
