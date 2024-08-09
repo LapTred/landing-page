@@ -9,7 +9,7 @@ const RegisterUploader = ({ tipo, persona }) => {
   const documentList1 = useMemo(() => [
     "Constancia de Situación Fiscal (.pdf) *",
     "Comprobante de domicilio (.pdf) *",
-    "Catálogo de productos (.pdf)",
+    "Catálogo de productos (.pdf) - Opcional",
     "Solicitud de crédito y requisitos (.pdf)",
     "Curriculum de la empresa (.pdf)",
     "Caratula bancaria (.pdf)"
@@ -62,11 +62,14 @@ const RegisterUploader = ({ tipo, persona }) => {
   const [documentList, setDocumentList] = useState(getDocumentList);
   const [currentStep, setCurrentStep] = useState(0);
   const [uploadedFiles, setUploadedFiles] = useState(Array(getDocumentList().length).fill([]));
+  const [skippedDocuments, setSkippedDocuments] = useState([]); // Estado para documentos omitidos
 
   useEffect(() => {
     const newDocumentList = getDocumentList();
     setDocumentList(newDocumentList);
     setUploadedFiles(Array(newDocumentList.length).fill([]));
+    setSkippedDocuments([]); // Reiniciar documentos omitidos cuando cambia el documento
+    setCurrentStep(0); // Reiniciar al primer paso
   }, [getDocumentList]);
 
   const handleFileUpload = (index, newFiles) => {
@@ -74,8 +77,7 @@ const RegisterUploader = ({ tipo, persona }) => {
     updatedFiles[index] = [...updatedFiles[index], ...newFiles];
     setUploadedFiles(updatedFiles);
 
-    const nextStep = updatedFiles.findIndex(files => files.length === 0);
-    setCurrentStep(nextStep === -1 ? documentList.length : nextStep);
+    advanceToNextStep(index);
   };
 
   const handleFileDelete = (docIndex, fileIndex) => {
@@ -83,12 +85,22 @@ const RegisterUploader = ({ tipo, persona }) => {
     updatedFiles[docIndex] = updatedFiles[docIndex].filter((_, idx) => idx !== fileIndex);
     setUploadedFiles(updatedFiles);
 
-    const nextStep = updatedFiles.findIndex(files => files.length === 0);
-    setCurrentStep(nextStep === -1 ? documentList.length : nextStep);
+    // Volver a mostrar el botón de subir para documentos opcionales y obligatorios
+    if (updatedFiles[docIndex].length === 0) {
+      setCurrentStep(docIndex);
+    }
   };
 
   const handleSkip = () => {
-    const nextStep = currentStep + 1;
+    setSkippedDocuments([...skippedDocuments, currentStep]);
+    advanceToNextStep(currentStep);
+  };
+
+  const advanceToNextStep = (currentIndex) => {
+    let nextStep = currentIndex + 1;
+    while (nextStep < documentList.length && (uploadedFiles[nextStep].length > 0 || skippedDocuments.includes(nextStep))) {
+      nextStep++;
+    }
     setCurrentStep(nextStep >= documentList.length ? documentList.length : nextStep);
   };
 
@@ -105,30 +117,29 @@ const RegisterUploader = ({ tipo, persona }) => {
     <div>
       <div className="register__label-document column">
         <div>
-        <div className="register__gray-line"></div>
           {documentList.map((doc, index) => (
             <div key={index} className="register__document-section">
               <div className="register__document-label">
-                <p>{getIcon(doc)} {doc}</p>
+                <p>{index + 1}. {getIcon(doc)} {doc}</p>
                 {uploadedFiles[index]?.map((file, fileIndex) => (
                   <div key={fileIndex} className="upload-content">
                     <a href={URL.createObjectURL(file)} target="_blank" rel="noopener noreferrer">
                       {file.name}
                     </a>
-                    <button className="register__upload-button"onClick={() => handleFileDelete(index, fileIndex)}>&nbsp; x &nbsp; </button>
+                    <button onClick={() => handleFileDelete(index, fileIndex)}>Eliminar</button>
                   </div>
                 ))}
-              </div>              
-              <div className="register__document-upload">               
-                {index === currentStep && (
-                  <>
-                    <Uploader key={index} onUpload={(newFiles) => handleFileUpload(index, newFiles)} />
-                    {!doc.includes('*') && (
-                      <button className="register__button-skip" onClick={handleSkip}>Omitir</button>
-                    )}
-                  </>
-                )}
               </div>
+              
+              {index === currentStep && (
+                <>
+                  {!doc.includes('*') && (
+                    <button className="register__button-skip" onClick={handleSkip}>Omitir</button>
+                  )}
+                  <Uploader key={index} onUpload={(newFiles) => handleFileUpload(index, newFiles)} />
+                  
+                </>
+              )}
             </div>
           ))}
         </div>

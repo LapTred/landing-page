@@ -157,9 +157,9 @@ const Preregister = () => {
             </div>
           ) : (
             <div className="register__completion-message">              
-              <h2>¡Pre-registro completado!</h2> 
+              <h2>¡Gracias por finalizar tu pre-registro!</h2> 
               <br></br>             
-              <p className='register__label-message'>Gracias por completar tu pre-registro. Puedes continuar con la subida de archivos o iniciar sesión más tarde para completar tu registro.</p>  
+              <p className='register__label-message'>Es necesario que completes tu perfil para participar en nuestras licitaciones. Continúa con la carga de archivos para finalizar tu registro.</p>  
               <br></br>              
               <div className="flex justifyRight">
                   <button className="register__button-form" type="button" onClick={handleContinue2}>

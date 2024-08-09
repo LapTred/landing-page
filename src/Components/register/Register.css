@@ -182,23 +182,24 @@
 
 .register__document-section {
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: space-between;
     border-bottom: rgb(164, 164, 164) solid 1px;
+    gap: 10px;
 }
 
 .register__document-label{
+    align-items: center;
     display: flex;
-    width: 90%;
+    width: 100%;
     justify-content: space-between; 
     padding: 15px;
+    padding-right: 0px;
 }
 
 .register__document-upload{
-    display: flex;      
-    padding-left: 10px;     
-    padding-bottom: 10px;
-    padding-top: 10px;
+    display: flex;
+    gap: 10px;
 }
 
 .upload-content{
@@ -210,26 +211,19 @@
     cursor: pointer;
 }
 
-@media screen and (max-width:1300px) {
-    .register__container-left{
-        display: none;
-    }
-    .register__container-right{
-        width: 100%;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
+.register__button-skip{
+    display: flex;
+    border: none;
+    cursor: pointer;
+    padding: 5px;    
+    background-color: transparent;  
+    justify-content: center;
+    text-align: center;      
+    font-size: 18px;
 }
-@media screen and (max-width:720px) {
-    .register__inputWrapper{
-        flex-direction: column;
-    }
-    .register__input{
-        width: 100%;
-        min-width: 250px;
-    }
 
-
+button{
+    font-family: var(--body-font);
 }
 
 
@@ -318,4 +312,27 @@
 .register__button-form:active {
     box-shadow: none;
     transform: translateY(0);
+}
+
+
+@media screen and (max-width:1300px) {
+    .register__container-left{
+        display: none;
+    }
+    .register__container-right{
+        width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+@media screen and (max-width:720px) {
+    .register__inputWrapper{
+        flex-direction: column;
+    }
+    .register__input{
+        width: 100%;
+        min-width: 250px;
+    }
+
+
 }

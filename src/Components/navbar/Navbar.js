@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
 import "./Navbar.css";
@@ -6,32 +6,32 @@ import Logo from "../../assets/Landing/AtisaGroup-bco.svg";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const location = useLocation(); // Hook para obtener la ruta actual
+  const location = useLocation(); 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null); // Estado para controlar el dropdown activo
-  const [showSubmenu, setShowSubmenu] = useState(false); // Estado para controlar el submenu principal
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false); // Estado para controlar el menú móvil
+  const [activeDropdown, setActiveDropdown] = useState(null); 
+  const [showSubmenu, setShowSubmenu] = useState(false);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Función para manejar la navegación y cerrar los menús desplegables
+  const menuRef = useRef(null);
+  const menuToggleRef = useRef(null); 
+
   const handleNavigation = (path) => {
     navigate(path);
-    setDropdownOpen(false); // Cerrar dropdown principal en la navegación
-    setShowSubmenu(false); // Cerrar submenu principal en la navegación
-    setActiveDropdown(null); // Limpiar el dropdown activo en la navegación
-    setMobileMenuOpen(false); // Cerrar menú móvil en la navegación
+    setDropdownOpen(false); 
+    setShowSubmenu(false); 
+    setActiveDropdown(null); 
+    setMobileMenuOpen(false); 
   };
 
-  // Manejar entrada y salida del dropdown principal
   const handleMouseEnter = () => {
     setDropdownOpen(true);
   };
 
   const handleMouseLeave = () => {
     setDropdownOpen(false);
-    setActiveDropdown(null); // Limpiar el dropdown activo al salir
+    setActiveDropdown(null); 
   };
 
-  // Mostrar y ocultar el submenu principal
   const handleSubmenuEnter = () => {
     setShowSubmenu(true);
   };
@@ -40,18 +40,34 @@ const Navbar = () => {
     setShowSubmenu(false);
   };
 
-  // Manejar entrada y salida de cada dropdown individualmente
   const handleDropdownEnter = (dropdownName) => {
     setActiveDropdown(dropdownName);
   };
 
-  // Función para determinar si una ruta está activa
   const isActive = (path) => location.pathname === path;
 
-  // Función para manejar el clic en el ícono de menú móvil
   const handleMobileMenuToggle = () => {
-    setMobileMenuOpen(!isMobileMenuOpen);
+    setMobileMenuOpen((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        menuToggleRef.current &&
+        !menuToggleRef.current.contains(event.target)
+      ) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className="header">
@@ -65,7 +81,11 @@ const Navbar = () => {
           </NavLink>
         </div>
         
-        <div className={`nav__menu ${isMobileMenuOpen ? "show-menu" : ""}`} id="nav-menu">
+        <div
+          className={`nav__menu ${isMobileMenuOpen ? "show-menu" : ""}`}
+          id="nav-menu"
+          ref={menuRef}
+        >
           <ul className="nav__list">
             <li className={`nav__item ${isActive("/about") ? "active" : ""}`} onClick={() => handleNavigation("/about")}>
               <span className="nav__link">QUIENES SOMOS</span>
@@ -77,8 +97,8 @@ const Navbar = () => {
               className="nav__item"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
-              onMouseOver={() => handleSubmenuEnter()}
-              onMouseOut={() => handleSubmenuLeave()}
+              onMouseOver={handleSubmenuEnter}
+              onMouseOut={handleSubmenuLeave}
             >
               <span className="nav__link">PROVEEDORES</span>
               {isDropdownOpen && (
@@ -86,8 +106,8 @@ const Navbar = () => {
                   <li
                     className="dropdown__item"
                     style={{ backgroundColor: "#AA2B27" }}
-                    onMouseOver={() => handleSubmenuEnter()}
-                    onMouseOut={() => handleSubmenuLeave()}
+                    onMouseOver={handleSubmenuEnter}
+                    onMouseOut={handleSubmenuLeave}
                   >
                     CONSTRUCCIÓN
                     {activeDropdown === "proveedores" && showSubmenu && (
@@ -104,8 +124,8 @@ const Navbar = () => {
                   <li
                     className="dropdown__item"
                     style={{ backgroundColor: "#881F1A" }}
-                    onMouseOver={() => handleSubmenuEnter()}
-                    onMouseOut={() => handleSubmenuLeave()}
+                    onMouseOver={handleSubmenuEnter}
+                    onMouseOut={handleSubmenuLeave}
                   >
                     MATERIALES P/CONSTRUCCIÓN
                     {activeDropdown === "proveedores" && showSubmenu && (
@@ -122,8 +142,8 @@ const Navbar = () => {
                   <li
                     className="dropdown__item"
                     style={{ backgroundColor: "#680F06" }}
-                    onMouseOver={() => handleSubmenuEnter()}
-                    onMouseOut={() => handleSubmenuLeave()}
+                    onMouseOver={handleSubmenuEnter}
+                    onMouseOut={handleSubmenuLeave}
                   >
                     REFACCIONES MAQ. PESADA
                     {activeDropdown === "proveedores" && showSubmenu && (
@@ -140,8 +160,8 @@ const Navbar = () => {
                   <li
                     className="dropdown__item"
                     style={{ backgroundColor: "#470000" }}
-                    onMouseOver={() => handleSubmenuEnter()}
-                    onMouseOut={() => handleSubmenuLeave()}
+                    onMouseOver={handleSubmenuEnter}
+                    onMouseOut={handleSubmenuLeave}
                   >
                     INSUMOS P/OFICINA
                     {activeDropdown === "proveedores" && showSubmenu && (
@@ -172,7 +192,7 @@ const Navbar = () => {
             <IoClose />
           </div>
         </div>
-        <div className="nav__toggle" id="nav-toggle" onClick={handleMobileMenuToggle}>
+        <div className="nav__toggle" id="nav-toggle" onClick={handleMobileMenuToggle} ref={menuToggleRef}>
           <IoMenu />
         </div>
       </nav>
