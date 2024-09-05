@@ -3,10 +3,13 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
 import "./Navbar.css";
 import Logo from "../../assets/Landing/AtisaGroup-bco.svg";
+import { useTokenContext } from '../../context/TokenContext'; // Importa el contexto
+
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation(); 
+  const { token, clearToken } = useTokenContext(); // Usa el contexto para acceder al token y la función de logout
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null); 
   const [showSubmenu, setShowSubmenu] = useState(false);
@@ -21,6 +24,11 @@ const Navbar = () => {
     setShowSubmenu(false); 
     setActiveDropdown(null); 
     setMobileMenuOpen(false); 
+  };
+
+  const handleLogout = () => {
+    clearToken(); // Limpia el token usando la función del contexto
+    navigate('/login'); // Redirige al login
   };
 
   const handleMouseEnter = () => {
@@ -184,9 +192,15 @@ const Navbar = () => {
             <li className={"nav__item"}>
               <span className="nav__link">ESP|ENG</span>
             </li>
-            <li className={`nav__item ${isActive("/login") ? "active" : ""}`} onClick={() => handleNavigation("/login")}>
-              <span className="nav__link">INICIAR SESIÓN</span>
-            </li>
+            {token ? (
+              <li className="nav__item" onClick={handleLogout}>
+                <span className="nav__link">CERRAR SESIÓN</span>
+              </li>
+            ) : (
+              <li className={`nav__item ${isActive("/login") ? "active" : ""}`} onClick={() => handleNavigation("/login")}>
+                <span className="nav__link">INICIAR SESIÓN</span>
+              </li>
+            )}
           </ul>
           <div className="nav__close" id="nav-close" onClick={handleMobileMenuToggle}>
             <IoClose />

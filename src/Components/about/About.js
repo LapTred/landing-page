@@ -16,8 +16,11 @@ import Asset12 from "../../assets/Landing/Asset12.png";
 import Asset13 from "../../assets/Landing/Asset13.png";
 import Asset14 from "../../assets/Landing/Asset14.png";
 
+import { useTokenContext } from '../../context/TokenContext'; // Importa el contexto
+
 const About = () => {
-    const [hovered, setHovered] = useState(null);
+    const [hovered, setHovered] = useState(null);    
+    const { token } = useTokenContext(); // Obtén el token del contexto
 
     const handleMouseEnter = (id) => {
         setHovered(id);
@@ -52,9 +55,15 @@ const About = () => {
                     </div>
                     <div className="contentBox">
                         <div className="buttonBox">
-                            <NavLink to="/register" id="ninth" >
-                                <button className="about__button">REGISTRO PARA PROVEEDORES</button>
-                            </NavLink>
+                            {token ? (
+                                <NavLink to="/register" id="ninth" >
+                                    <button className="about__button"> Bienvenido, {token.nombre}</button>
+                                </NavLink>
+                                ) : (
+                                <NavLink to="/register" id="ninth" >
+                                    <button className="about__button"> REGISTRO PARA PROVEEDORES</button>
+                                </NavLink>
+                            )}
                         </div>                      
                     </div>
                 </div>

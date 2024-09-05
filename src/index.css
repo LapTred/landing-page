@@ -38,6 +38,12 @@ a {
 .margin0{
   margin: 0;
 }
+
+.marginBottom10{
+  margin-bottom: 10px;
+}
+
+
 /*Animacion*/
 .fastTransition{
   transition: 0.3s;

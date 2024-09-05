@@ -66,7 +66,7 @@ const SpecialtiesForm = () => {
             )}
           </div>          
           {index === selectedSpecialties.length - 1 && (
-            <div>
+            <div className='marginBottom10'>
               <p>Para seleccionar la especialidad adecuada. Te compartimos un documento que contiene una descripción de las especialidades disponibles.  <a className="register__link" href="https://www.atisa.com/cadena_de_suministros/tabla_especialidades.pdf" target="_blank" rel="noopener noreferrer">Tabla de Especialidades</a>
               </p>
                </div>              
@@ -88,7 +88,7 @@ const SpecialtiesForm = () => {
               />
             </div>
             {index === selectedSpecialties.length - 1 && (
-              <p>De acuerdo a la especialidad elegida, favor de indicar 3 (tres) principales alcances de forma general.</p>
+              <p className='marginBottom10'>De acuerdo a la especialidad elegida, favor de indicar 3 (tres) principales alcances de forma general.</p>
             )}
             {index !== selectedSpecialties.length - 1 && (
               <br></br>

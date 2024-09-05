@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Navbar from "./Components/navbar/Navbar.js";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import About from "./Components/about/About.js";
 import Specialty from "./Components/specialty/Specialties.js";
 import Footer from './Components/footer/Footer.js'; 
@@ -10,8 +10,8 @@ import Register from "./Components/register/Register.js";
 import PreRegister from "./Components/register/SubRegister.js";
 
 const App = () => {
+  
   return (
-    <Router>
       <div className="app-container">
         <Navbar />
         <main className="main-content">
@@ -26,7 +26,6 @@ const App = () => {
         </main>
         <Footer />
       </div>
-    </Router>
   );
 };
 
