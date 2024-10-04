@@ -8,7 +8,7 @@ import { useTokenContext } from '../../context/TokenContext'; // Importa el cont
 async function loginEmail(credential) {
     const hash = md5(credential.pass);
     const body = {
-        'email': credential.email,
+        'email': credential.email.toLowerCase(),
         'pass': hash
     };
 
@@ -48,8 +48,8 @@ const Login = () => {
         <div className="login">            
             <div className="login__container">
                 <div className="login__text-container">
-                    <p className="login__text">INGRESA A NUESTRO PORTAL DE LICITACIONES CON TU USUARIO Y CONTRASEÑA PROPORCIONADO POR EL DEPARTAMENTO DE CADENA DE SUMINISTROS</p>
-                    {error && <div className="errorMsg fadeIn"><p>Credenciales incorrectas</p></div>}
+                    <p className="login__text">INGRESA A NUESTRO PORTAL DE LICITACIONES CON TU CORREO ELECTRÓNICO Y CONTRASEÑA</p>
+                    {error && <div className="login__errorMsg"><p>Credenciales incorrectas</p></div>}
                 </div>
                 <div className="login__form-container">
                     <form className="flex column login__form spaceAround" onSubmit={handleSubmit}>
@@ -74,7 +74,7 @@ const Login = () => {
                         <p className="login__text-password ">OLVIDÉ LA CONTRASEÑA</p>
                         <button className="inputBtn fastTransition" type='submit'>Ingresar</button>
                     </form>
-                    <p className="login__form">SI AÚN NO ERES USUARIO,&nbsp;
+                    <p className="login__form">SI AÚN NO TIENES CUENTA,&nbsp;
                         <NavLink to="/register" className="register-link">REGÍSTRATE AQUÍ</NavLink>
                     </p>
                 </div>

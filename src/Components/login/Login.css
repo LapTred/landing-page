@@ -41,12 +41,16 @@ h1.formTile {
 p.formText {
     text-align: center;
 }
-.errorMsg {
-    width: 89%;
+.login__errorMsg {
     text-align: center;
     border: 2px solid #ef362c;
     background-color: #FF6961;
-    margin-bottom: 15px;
+    border-radius: 0.5rem;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 /*inputs*/
 .TextInput {

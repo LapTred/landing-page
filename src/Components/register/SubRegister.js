@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useState, useEffect } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useTokenContext } from '../../context/TokenContext'; // Importa el contexto
 import "./Register.css";
 import background from "../../assets/Landing/Registro.JPG";
 import PhoneInput from 'react-phone-input-2';
@@ -8,7 +9,24 @@ import Select from 'react-select';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import axios from 'axios';
 import md5 from 'md5';
-import { useTokenContext } from '../../context/TokenContext'; // Importa el contexto
+
+async function loginEmail(credential) {
+  const hash = md5(credential.password);
+  const body = {              
+    'email': credential.email.toLowerCase(),
+    'pass': hash,
+  };
+
+  try {
+    const res = await axios.post(`${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_GET_COMPRAS_USERS}`, body);
+    if (res.status === 200) {
+        return res.data;
+    }
+  } catch (error) {
+    console.error("Error durante la autenticación:", error);
+    return null;
+  }    
+}    
 
 const Preregister = () => {
   const [name, setName] = useState('');
@@ -23,34 +41,28 @@ const Preregister = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(true); // Estado de carga inicial
   const navigate = useNavigate();
-  const { token } = useTokenContext(); // Obtén el token del contexto
+  const { token } = useTokenContext(); // Obtén el token del contexto  
+  const { setToken } = useTokenContext(); // Usa el contexto para setear el token
 
   useEffect(() => {
     if (token) {
-      handleContinue2(); // Activa la función si el token existe
+      navigate(`/postregister`);
     } else {
       setLoading(false); // Finaliza la carga si no hay token
     }
-  }, [token]);
+  }, [token, navigate]); // Incluye 'navigate' en la lista de dependencias
 
-  const handleContinue2 = () => {
-    if (token) {
-      if (token.tipoCont === '1') {
-        setSelectedOption2({ value: 'moral', label: 'Persona Moral' });
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      const token = await loginEmail({ email, password });
+      if (token && Object.keys(token).length > 0) {
+          setToken(token); // Usa el contexto para setear el token
+          navigate(`/postregister`);
       } else {
-        setSelectedOption2({ value: 'fisica', label: 'Persona Física' });
+          console.error("Token inválido o vacío:", token);
       }
-      if (token.subcontratista) {
-        setSelectedOption1({ value: 'subcontrato', label: 'Subcontratistas' });
-      } else {
-        setSelectedOption1({ value: 'proveedor', label: 'Compras generales' });
-      }
-      // Navegar al siguiente paso después de establecer las opciones
-      navigate(`/postregister?tipo=${token.subcontratista ? 'subcontrato' : 'proveedor'}&persona=${token.tipoCont === '1' ? 'moral' : 'fisica'}`);
-    } else {
-      setLoading(false); // Finaliza la carga si no hay token
-    }
   };
+ 
 
   const options1 = [
     { value: 'proveedor', label: 'Compras generales' },
@@ -151,44 +163,52 @@ const Preregister = () => {
 
   const handleContinue = async () => {
     if (validateForm()) {
-       // Variables de estado para almacenar la información del formulario
-       const nombre = name;
-       const apellido = lastName;
-       const telefono = phone1;
-       const emailAddress = email;
-       const pass = md5(password);
+        const nombre = name;
+        const apellido = lastName;
+        const telefono = phone1;
+        const emailAddress = email;
+        const pass = md5(password);
 
-       // Variables de cgeneral, subcontratista y tipoCont basadas en las selecciones
-       const cgeneral = selectedOption1 && (selectedOption1.value === 'proveedor' || selectedOption1.value === 'subcontrato-proveedor') ? 1 : 0;
-       const subcontratista = selectedOption1 && (selectedOption1.value === 'subcontrato' || selectedOption1.value === 'subcontrato-proveedor') ? 1 : 0;
-       const tipoCont = selectedOption2 && (selectedOption2.value === 'moral' ? 1 : 2);
+        const cgeneral = selectedOption1 && (selectedOption1.value === 'proveedor' || selectedOption1.value === 'subcontrato-proveedor') ? 1 : 0;
+        const subcontratista = selectedOption1 && (selectedOption1.value === 'subcontrato' || selectedOption1.value === 'subcontrato-proveedor') ? 1 : 0;
+        const tipoCont = selectedOption2 && (selectedOption2.value === 'moral' ? 1 : 2);
 
-       const body = {
-           nombre,
-           apellido,
-           telefono,
-           email: emailAddress.toLowerCase(),
-           pass,
-           cgeneral,
-           subcontratista,
-           tipoCont,
-       };
+        const body = {
+            nombre,
+            apellido,
+            telefono,
+            email: emailAddress.toLowerCase(),
+            pass,
+            cgeneral,
+            subcontratista,
+            tipoCont,
+        };
 
-      try {
-        const res = await axios.post(process.env.REACT_APP_API_HOST+"/compras/setUser",body)
-        if (res.status === 200) {
-          const data = res.data;
-          console.log('Usuario registrado exitosamente:', data);
+        // Declara newErrors aquí
+        const newErrors = {};
+
+        try {
+            const res = await axios.post(process.env.REACT_APP_API_HOST + "/compras/setUser", body);
+            if (res.status === 200) {
+                const data = res.data;
+
+                // Verifica si el resultado solo contiene el id
+                if (data.length === 1 && data[0].id) {
+                    console.error('Ya existe un usuario con este correo:', emailAddress);
+                    newErrors.email = 'Ya existe una cuenta asociada a este correo';
+                    setErrors(newErrors); // Actualiza el estado de errores
+                } else {
+                    console.log('Usuario registrado exitosamente:', data);
+                    setIsCompleted(true);
+                }
+            }
+        } catch (error) {
+            console.error('Error al registrar usuario:', error);
         }
-      } catch (error) {
-        console.error('Error al registrar usuario:', error);
-      }
-
-      console.log({ nombre, apellido, telefono, emailAddress, pass, cgeneral, subcontratista, tipoCont });
-
-      setIsCompleted(true);
     }
-  };
+};
+
+
 
   const validateForm = () => {
     const newErrors = {};
@@ -410,7 +430,10 @@ const Preregister = () => {
                     {errors.selectedOption2 && <p className="error-text">{errors.selectedOption2}</p>}
                   </div>
                 </div>
-                <div className="flex justifyRight">
+                <div className="flex spaceBetween centerItems">
+                  <p>SI YA TIENES CUENTA, &nbsp;
+                        <NavLink to="/login" className="register-link">INICIA SESIÓN AQUÍ</NavLink>
+                  </p>
                   <button className="register__button-form" type="button" onClick={handleContinue}>
                     Enviar
                   </button>
@@ -424,7 +447,7 @@ const Preregister = () => {
               <p className='register__label-message'>Es necesario que completes tu perfil para participar en nuestras licitaciones. Continúa con la carga de archivos para finalizar tu registro.</p>
               <br></br>
               <div className="flex justifyRight">
-                  <button className="register__button-form" type="button" onClick={handleContinue2}>
+                  <button className="register__button-form" type="button" onClick={handleSubmit}>
                     Subir archivos
                   </button>
                 </div>

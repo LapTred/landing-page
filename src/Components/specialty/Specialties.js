@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import background from "../../assets/Specialty/Imagen-de-fondo2.jpg";
 import "./Specialty.css";
 import Asset17 from "../../assets/Specialty/Asset17.png";
 import Asset18 from "../../assets/Specialty/Asset18.png";
-import { specialties } from "./specialtiesData";
+import specialties from "./specialtiesData"; // Importa como default
 
 const Specialty = () => {
     const [visibleInfo, setVisibleInfo] = useState([]);
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        // Llamada a la función specialties para obtener los datos
+        const fetchData = async () => {
+            const fetchedData = await specialties();
+            if (fetchedData) {
+                setData(fetchedData);
+            }
+        };
+
+        fetchData();
+
+        
+    }, []);
 
     const toggleInfo = (id) => {
         setVisibleInfo((prevVisibleInfo) =>
@@ -39,7 +54,7 @@ const Specialty = () => {
                 </div>
             </div>
             <div className="specialty__tables">
-                {specialties.map((table) => (
+                {data.map((table) => (
                     <div key={table.id}>
                         <div className="specialty__table-title" onClick={() => toggleInfo(table.id)}>
                             <img src={visibleInfo.includes(table.id) ? Asset17 : Asset18} alt="Icon" className="specialty__icon" />

@@ -78,6 +78,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    text-align: justify;
     
 }
 
@@ -125,6 +126,7 @@
 .error-text{
     color: red !important; 
     font-weight: 600;
+    margin-bottom: 5px;
 }
 
 .register__input p {

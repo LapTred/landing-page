@@ -1,17 +1,26 @@
-
 import { useState } from 'react';
 import './Uploader.css';
 import { MdCloudUpload, MdDelete } from 'react-icons/md';
 import { AiFillFileImage } from 'react-icons/ai';
 
-function Uploader({ onUpload }) {
+function Uploader({ onUpload, validFileTypes }) {
   const [files, setFiles] = useState([]);
+  const [error, setError] = useState('');
 
   const handleFileChange = ({ target: { files: newFiles } }) => {
     const updatedFiles = Array.from(newFiles);
-    setFiles(prevFiles => [...prevFiles, ...updatedFiles]);
-    if (updatedFiles.length > 0) {
-      onUpload(updatedFiles);
+    const validFiles = updatedFiles.filter(file => validateFile(file));
+
+    if (validFiles.length > 0) {
+      // Si hay archivos válidos, actualiza el estado y envía los archivos válidos a `onUpload`
+      setFiles(prevFiles => [...prevFiles, ...validFiles]);
+      onUpload(validFiles);
+      setError('');
+    }
+
+    if (updatedFiles.length !== validFiles.length) {
+      // Si hay archivos no válidos, muestra un mensaje de error
+      setError('Archivo no válido');
     }
   };
 
@@ -19,13 +28,21 @@ function Uploader({ onUpload }) {
     setFiles(prevFiles => prevFiles.filter((_, i) => i !== index));
   };
 
+  const validateFile = (file) => {
+    const extension = file.name.split('.').pop().toLowerCase();
+    return validFileTypes.includes(extension);
+  };
+
   return (
-    <main>
-      <form className="uploaded-form">
+    <main className='flex centerItems centerContent'>
+      {error && <p className="error-message">{error}</p>}
+
+      {/* Reemplaza el form por un div */}
+      <div className="uploaded-form">
         <label htmlFor="fileInput" className="input-label">
           <input
             type="file"
-            accept=".pdf, image/*"
+            accept={validFileTypes.map(ext => `.${ext}`).join(', ')}
             id="fileInput"
             className="input-field"
             hidden
@@ -33,7 +50,7 @@ function Uploader({ onUpload }) {
           />
           <p>Subir</p>
         </label>
-      </form>
+      </div>
 
       {files.length > 0 && (
         <section className="uploaded-row">
